@@ -18,8 +18,17 @@ public class itemmanage {
     public static void main(String[] args) throws Exception {
         //여기서 시작 n 부터 최대 n+100까지 책 리스트 받아오기 가능. 책 리스트 다 받으려면
         //while문 돌면서 n + 100*i 해서 계속 돌리면서 db에 넣어야 할 듯?
-        String url = "http://www.aladin.co.kr/ttb/api/ItemList.aspx?ttbkey=ttbsonsh53641858001&QueryType=ItemNewAll&MaxResults=10&start=1&SearchTarget=Book&output=xml&Version=20131101";
+        String url = "http://www.aladin.co.kr/ttb/api/ItemList.aspx?";
+        //여기서 기준 추가
 
+        url += "ttbkey=ttbsonsh53641858001";//ttbkey (건드리지마)
+        url += "&QueryType=Bestseller";//QueryType
+        url += "&MaxResults=100";//MaxResults
+        url += "&start=1";//start
+        url += "&SearchTarget=Book";//SearchTarget
+        url += "&output=xml";//output (건드리지마)
+        url += "&Version=20131101";//Version
+        //갖고오기
         DocumentBuilderFactory dbFactoty = DocumentBuilderFactory.newInstance();
         DocumentBuilder dBuilder = dbFactoty.newDocumentBuilder();
         Document doc = dBuilder.parse(url);
@@ -38,8 +47,7 @@ public class itemmanage {
             if(nNode.getNodeType() == Node.ELEMENT_NODE){
 
                 Element eElement = (Element) nNode;
-                System.out.println("######################");
-//                System.out.println(eElement.getTextContent());
+                System.out.println();
                 System.out.println("제목  : " + getTagValue("title", eElement));
                 System.out.println("url주소  : " + getTagValue("link", eElement));
                 System.out.println("저자/아티스트 : " + getTagValue("author", eElement));
