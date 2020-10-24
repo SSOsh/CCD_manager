@@ -64,15 +64,17 @@ class AladdinOpenAPIHandler extends DefaultHandler {
     }
 }
 
-public class parsing {
-    private static final String BASE_URL = "http://www.aladin.co.kr/ttb/api/ItemList.aspx";
+public class search {
+    private static final String BASE_URL = "http://www.aladdin.co.kr/ttb/api/ItemSearch.aspx?";
 
     public static String GetUrl(String searchWord) throws Exception {
         Map<String,String> hm = new HashMap<String,String>();
-        hm.put("TTBkey", "ttbsonsh53641858001");
-        hm.put("QueryType", "Bestseller");
+        hm.put("ttbkey", "ttbsonsh53641858001");
+        hm.put("Query", URLEncoder.encode(searchWord, "UTF-8"));
+        hm.put("QueryType", "Title");
+        hm.put("MaxResults", "10");
+        hm.put("start", "1");
         hm.put("SearchTarget", "Book");
-        hm.put("MaxResults", "30");
         hm.put("output", "xml");
 
         StringBuffer sb = new StringBuffer();
@@ -87,7 +89,7 @@ public class parsing {
     }
 
     public static void main(String[] args) throws Exception {
-        String url = GetUrl("");
+        String url = GetUrl("나미야");
         AladdinOpenAPIHandler api = new AladdinOpenAPIHandler();
         api.parseXml(url);
         for(Item item : api.Items){
