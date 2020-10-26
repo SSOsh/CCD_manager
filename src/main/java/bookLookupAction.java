@@ -1,9 +1,12 @@
 import java.util.HashMap;
+import javax.servlet.*;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 public class bookLookupAction implements Action {
-
     @Override
-    public void excute(HttpservletRequest request, HttpSerbletResponse response) {
+    public void execute(HttpServletRequest request, HttpServletResponse response) {
         try {
             request.setCharacterEncoding("utf-8");
             String[] condtionNames = {""};

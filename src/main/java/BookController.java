@@ -1,8 +1,12 @@
 import java.util.HashMap;
+import javax.servlet.*;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
-@WebSerblet()
+@WebServlet()
 public class BookController extends HttpServlet {
-
     HashMap<String, Action> list = null;
     @Override
     protected  void service(HttpServletRequest request, HttpServletResponse response) {

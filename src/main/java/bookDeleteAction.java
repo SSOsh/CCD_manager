@@ -1,9 +1,11 @@
 import java.io.PrintWriter;
+import javax.servlet.*;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 public class bookDeleteAction implements  Action{
-
     @Override
-    public void excute(HttpservletRequest request, HttpSerbletResponse response) {
+    public void execute(HttpServletRequest request, HttpServletResponse response) {
         try {
             request.setCharacterEncoding("utf-8");
             request.setContentType("text/html; charset=utf-8");
