@@ -25,7 +25,7 @@ public class itemmanage {
         url += "&QueryType=Bestseller";//QueryType
         url += "&MaxResults=100";//MaxResults
         url += "&start=1";//start
-        url += "&SearchTarget=Book";//SearchTarget
+        url += "&SearchTarget=model.Book";//SearchTarget
         url += "&output=xml";//output (건드리지마)
         url += "&Version=20131101";//Version
         //갖고오기

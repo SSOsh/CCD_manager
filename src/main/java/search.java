@@ -74,7 +74,7 @@ public class search {
         hm.put("QueryType", "Title");
         hm.put("MaxResults", "10");
         hm.put("start", "1");
-        hm.put("SearchTarget", "Book");
+        hm.put("SearchTarget", "model.Book");
         hm.put("output", "xml");
 
         StringBuffer sb = new StringBuffer();

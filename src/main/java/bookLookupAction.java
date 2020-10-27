@@ -15,7 +15,7 @@
 //                String value = request.getParameter(condition);
 //                if(value != "") condtions.put(condition, value);
 //            }
-//            Book[] lookupResult = BookDAO.getInstance().lookup(condtions);
+//            model.Book[] lookupResult = BookDAO.getInstance().lookup(condtions);
 //            request.setAttribute("lookupResult", lookupResult);
 //            ServletContext context = request.getServletContext();
 //            RequestDispatcher dispatcher = context.getRequestDispatcher("/bookManage"); //넘길 페이지

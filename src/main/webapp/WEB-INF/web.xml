@@ -7,7 +7,7 @@ http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd" version="3.1">
 
     <display-name>CCD</display-name>
     <welcome-file-list>
-        <welcome-file>BookView/bookMain.jsp</welcome-file> <!--여기에 시작할 페이지 설정해준다-->
+        <welcome-file>BookView/Main.jsp</welcome-file> <!--여기에 시작할 페이지 설정해준다-->
         <!--        <welcome-file>view/default/login.jsp</welcome-file>-->
         <!--        <welcome-file>view/default/main.jsp</welcome-file>-->
         <!--        <welcome-file>index.html</welcome-file>-->
