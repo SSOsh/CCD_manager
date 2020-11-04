@@ -15,6 +15,7 @@ public class BookDBManager extends DBConnector
             throwables.printStackTrace();
         }
     }
+
     //책 정보 관리 클릭하자 마자 전체 책 리스트 조회
     //아직 서블릿 구현 안함
     public ArrayList<Book> browseBookList()

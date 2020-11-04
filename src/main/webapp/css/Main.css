@@ -6,8 +6,9 @@ h1 { text-align: center; }
 
 .myhr {
     border: 0;
-    height: 10px;
-    background: rgb(112, 111, 111);
+    height: 7px;
+    background: hotpink;
+    /*background: rgb(112, 111, 111);*/
 }
 
 /*링크 클릭할 때 a태그 css*/
@@ -59,7 +60,8 @@ a:hover { color: rgb(59, 59, 61); text-decoration:none;}
     z-index: 1;
     top: 0;
     left: 0;
-    background-color: #111;
+    background-color: rgb(241, 190, 225);
+    /*background-color: #111111;*/
     overflow-x: hidden;
     transition: 0.5s;
     padding-top: 60px;
@@ -69,13 +71,15 @@ a:hover { color: rgb(59, 59, 61); text-decoration:none;}
     padding: 8px 8px 8px 32px;
     text-decoration: none;
     font-size: 25px;
-    color: #818181;
+    color: ghostwhite;
+    /*color: #818181;*/
     display: block;
     transition: 0.3s;
 }
 
 .sidenav a:hover {
-    color: #f1f1f1;
+    color: hotpink;
+    /*color: #f1f1f1;*/
 }
 
 .sidenav .closebtn {

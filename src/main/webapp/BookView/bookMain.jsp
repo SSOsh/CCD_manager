@@ -13,12 +13,12 @@
     <link href="${pageContext.request.contextPath}/css/bookMain.css" rel="stylesheet" type="text/css">
 </head>
 <body>
-<%@include file="../BookView/Main.jsp" %>
+<%@include file="../DefaultView/Main.jsp" %>
 
 <div class="contents">
     <div class="divsize">
         <h2>책 정보 관리</h2>
-        <hr>
+        <hr class="hrPink">
         <div>
             <fieldset class="bookLookup">
                 <form class="formsize" action="/bookMain" method="POST" accept-charset="UTF-8">
@@ -50,7 +50,7 @@
             </fieldset>
         </div>
 
-        <hr>
+        <hr class="hrPink">
 
         <table class="bookTableHeader">
             <tr>
@@ -125,7 +125,7 @@
         <%--        </table>--%>
 
         <%--        <input class="deleteBtn" type="button" value="삭제" onclick="remove()"> <!--onclick()에 메서드 차후에 변경 요망-->--%>
-        <a href="Main.jsp"><input class="deleteBtn" type="button" value="삭제" onclick="remove()"></a>
+        <a href="../DefaultView/Main.jsp"><input class="deleteBtn" type="button" value="삭제" onclick="remove()"></a>
     </div>
 </div>  <!-- 내용 div 끝 마진을 왼쪽에서 190px 띄우는 div 끝-->
 
