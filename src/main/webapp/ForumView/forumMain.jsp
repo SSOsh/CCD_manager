@@ -16,7 +16,7 @@
 
 <div class="contents">
     <div class="divsize">
-        <h2>게시판 관리</h2>
+        <h2><a href="${pageContext.request.contextPath}/ForumView/forumMain.jsp">게시판 관리</a></h2>
         <hr class="hrPink">
         <div>
             <fieldset class="bookLookup">
@@ -31,7 +31,7 @@
                             <div class="inputGroup-prepend">
                                 <span class="input-group-text" id="base-addon1">게시판명</span>
                             </div>
-                            <input type="text" class="form-control" placeholder="게시판 명을 입력하세요"
+                            <input type="text" class="form-control" placeholder="게시판명 입력"
                                    name="title"> <%--aria-describedby="base-addon1" autocomplete="off"--%>
                         </div>
 
@@ -51,11 +51,11 @@
                 <td align="center">
 
                     <div style="width: 100%; height:20px;">
-                        <table border="1" width="100%" class="firstRow" cellspacing="1">
+                        <table border="0" width="100%" class="firstRow" cellspacing="1">
                             <tr align="center" height="20">
-                                <th width="20%">No.</th>
-                                <th width="60%">게시판명</th>
-                                <th width="20%">선택</th>
+                                <th width="10%">No.</th>
+                                <th width="80%">게시판명</th>
+                                <th width="10%">선택</th>
                             </tr>
                         </table>
                     </div>
@@ -68,21 +68,21 @@
                         <table class="tableBody" width="100%" ; cellspacing="1" border="1" style="table-layout: fixed">
                             <!--11 01 승환 추가한 예시에유-->
                             <tr>
-                                <td width="20%">0</td>
-                                <td width="60%">자유게시판</td>
-                                <td width="20%"><input type="radio" name="selected"></td>
+                                <td width="10%">0</td>
+                                <td width="80%">자유게시판</td>
+                                <td width="10%"><input type="radio" name="selected"></td>
                             </tr>
 
                             <tr>
-                                <td width="20%">1</td>
-                                <td width="60%">비밀게시판</td>
-                                <td width="20%"><input type="radio" name="selected"></td>
+                                <td width="10%">1</td>
+                                <td width="80%">비밀게시판</td>
+                                <td width="10%"><input type="radio" name="selected"></td>
                             </tr>
 
                             <tr>
-                                <td width="20%">2</td>
-                                <td width="60%">장터게시판</td>
-                                <td width="20%"><input type="radio" name="selected"></td>
+                                <td width="10%">2</td>
+                                <td width="80%">장터게시판</td>
+                                <td width="10%"><input type="radio" name="selected"></td>
                             </tr>
                             <!--11 01 승환 추가한 예시에유-->
                         </table>

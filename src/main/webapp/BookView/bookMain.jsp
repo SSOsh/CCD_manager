@@ -17,7 +17,7 @@
 
 <div class="contents">
     <div class="divsize">
-        <h2>책 정보 관리</h2>
+        <h2><a href="${pageContext.request.contextPath}/BookView/bookMain.jsp">책 정보 관리</a></h2>
         <hr class="hrPink">
         <div>
             <fieldset class="bookLookup">

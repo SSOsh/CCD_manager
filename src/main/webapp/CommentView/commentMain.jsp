@@ -16,8 +16,8 @@
 
 <div class="contents">
     <div class="divsize">
-        <h2>댓글 관리</h2>
-        <hr>
+        <h2><a href="${pageContext.request.contextPath}/CommentView/commentMain.jsp">댓글 관리</a></h2>
+        <hr class="hrPink">
         <div>
             <fieldset class="bookLookup">
                 <form class="formsize" action="/bookMain" method="POST" accept-charset="UTF-8">
@@ -49,7 +49,7 @@
             </fieldset>
         </div>
 
-        <hr>
+        <hr class="hrPink">
 
         <a href="../DefaultView/Main.jsp"><input class="deleteBtn" type="button" value="삭제" onclick="remove()"></a>
     </div>

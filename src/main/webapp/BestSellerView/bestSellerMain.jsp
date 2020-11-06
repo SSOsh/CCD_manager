@@ -16,42 +16,66 @@
 
 <div class="contents">
     <div class="divsize">
-        <h2>베스트셀러 조회</h2>
-        <hr>
+        <h2><a href="${pageContext.request.contextPath}/BestSellerView/bestSellerMain.jsp">베스트셀러 조회</a></h2>
+        <hr class="hrPink">
         <div>
-            <fieldset class="bookLookup">
-                <form class="formsize" action="/bookMain" method="POST" accept-charset="UTF-8">
-                    <div class="form-inline">
-                        <div class="inputGroup1">
-                            <h3>베스트 셀러 목록</h3>
+            <table class="bookTableHeader">
+                <tr>
+                    <td align="center">
+
+                        <div style="width: 100%; height:20px;">
+                            <table width="100%" class="firstRow" cellspacing="1">
+                                <tr align="center" height="20">
+                                    <th width="5%">No.</th>
+                                    <th width="5%">ID</th>
+                                    <th width="20%">이미지</th>
+                                    <th width="20%">제목</th>
+                                    <th width="10%">저자</th>
+                                    <th width="5%">별점</th>
+                                    <th width="25%">요약설명</th>
+                                    <th width="10%">출판사</th>
+                                </tr>
+                            </table>
                         </div>
+                        <%--이까지 테이블 헤더 고정 끝--%>
+                        <%--이까지 테이블 바디 스크롤 시작--%>
+                        <br> <!--헤더랑 바디 간격 띄우려고 추가-->
 
-                        <div class="inputGroup2">
-                            <div class="inputGroup-prepend">
-                                <span class="input-group-text" id="base-addon1">검색명</span>
-                            </div>
-                            <input type="text" class="form-control" placeholder="검색어 입력"
-                                   name="title"> <%--aria-describedby="base-addon1" autocomplete="off"--%>
+                        <div style="overflow: auto;width: 100%;height: 200px;">
+                            <table class="tableBody" width="100%" ; cellspacing="1" border="1" style="table-layout: fixed">
+                                <!--11 05 승환 추가한 예시에유-->
+                                <!--이미지는 img src 형식으로 넣으면 될거같음-->
+                                <tr>
+                                    <td width="5%">1</td>
+                                    <td width="5%">13054</td>
+                                    <td width="20%"><img src="${pageContext.request.contextPath}/image/lena_color.bmp" width="60px" height="60px"></td>
+                                    <td width="20%">레나레나</td>
+                                    <td width="10%">이해연</td>
+                                    <td width="5%">4.5</td>
+                                    <td width="25%">컴퓨터비전에 나오는 여자이다.</td>
+                                    <td width="10%">북스힐</td>
+                                </tr>
 
-                            <div class="inputGroup-prepend">
-                                <span class="input-group-text" id="base-addon2">검색명</span>
-                            </div>
-                            <input type="text" class="form-control" placeholder="검색어 입력"
-                                   name="author"> <%--aria-describedby="base-addon2" autocomplete="off"--%>
+                                <tr>
+                                    <td width="5%">2</td>
+                                    <td width="5%">34054</td>
+                                    <td width="20%"><img src="${pageContext.request.contextPath}/image/Baboon.bmp" width="60px" height="60px"></td>
+                                    <td width="20%">바분</td>
+                                    <td width="10%">이해연</td>
+                                    <td width="5%">3.5</td>
+                                    <td width="25%">컴퓨터비전에 나오는 원숭이다.</td>
+                                    <td width="10%">해커스</td>
+                                </tr>
+
+                                <!--11 05 승환 추가한 예시에유-->
+                            </table>
                         </div>
-
-                        <div class="inputGroup3">
-                            <br>
-                            <button type="submit" class="inquiryBtn">검색</button>
-                        </div>
-                    </div>
-                </form>
-            </fieldset>
-        </div>
-
-        <hr>
+                        <!--테이블 내용 스크롤 끝-->
+                    </td>
+                </tr>
+            </table>
     </div>
 </div>  <!-- 내용 div 끝 마진을 왼쪽에서 190px 띄우는 div 끝-->
-
+</div>
 </body>
 </html>

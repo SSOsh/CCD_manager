@@ -16,44 +16,55 @@
 
 <div class="contents">
     <div class="divsize">
-        <h2>도서관련영상 조회</h2>
-        <hr>
-        <div>
-            <fieldset class="bookLookup">
-                <form class="formsize" action="/bookMain" method="POST" accept-charset="UTF-8">
-                    <div class="form-inline">
-                        <div class="inputGroup1">
-                            <h3>도서관련 영상 조회</h3>
-                        </div>
+        <h2><a href="${pageContext.request.contextPath}/VideoView/videoMain.jsp">도서관련영상 조회</a></h2>
+        <hr class="hrPink">
+<%--        id는 player로 설정하고 바디 마지막부분에 [스크립트]에서 유튜브api사용함--%>
+<%--        %! 로 선언 / % 에서 코딩 / %= 로 출력--%>
+        <%!String bookTitle;%>
+        <%bookTitle="해리포터";%>
+        <h3>원작 책 제목 : <%=bookTitle%></h3>
 
-                        <div class="inputGroup2">
-                            <div class="inputGroup-prepend">
-                                <span class="input-group-text" id="base-addon1">검색명</span>
-                            </div>
-                            <input type="text" class="form-control" placeholder="검색어 입력"
-                                   name="title"> <%--aria-describedby="base-addon1" autocomplete="off"--%>
-
-                            <div class="inputGroup-prepend">
-                                <span class="input-group-text" id="base-addon2">검색명</span>
-                            </div>
-                            <input type="text" class="form-control" placeholder="검색어 입력"
-                                   name="author"> <%--aria-describedby="base-addon2" autocomplete="off"--%>
-                        </div>
-
-                        <div class="inputGroup3">
-                            <br>
-                            <button type="submit" class="inquiryBtn">검색</button>
-                        </div>
-                    </div>
-                </form>
-            </fieldset>
+        <div id="player">
+            <%--지금 해놓은 영상 url은 이거 : 'https://youtu.be/7jKXT4Jdvd4'--%>
         </div>
+        <hr class="hrPink">
 
-        <hr>
-
-        <a href="../DefaultView/Main.jsp"><input class="deleteBtn" type="button" value="삭제" onclick="remove()"></a>
+        <div class="videoBtn">
+        <a href="../VideoView/videoMain.jsp"><input class="prevBtn" type="button" value="이전" onclick=""></a>
+        <a href="../VideoView/videoMain.jsp"><input class="nextBtn" type="button" value="다음" onclick=""></a>
+        </div>
     </div>
 </div>  <!-- 내용 div 끝 마진을 왼쪽에서 190px 띄우는 div 끝-->
+
+<%--11 06 승환 - 여기부터 자바스크립트 --%>
+<script src="http://www.youtube.com/player_api"></script>
+<script type="text/javascript">
+    //여기 videoId가 유튜브링크복사하면 있는 고유한 식별자인데 이걸로 배열을 만들어서 순서대로 돌리면 좋을듯?
+    var player;
+    function onYouTubePlayerAPIReady(){
+        player = new YT.Player("player",{
+            width: "100%",
+            height: "500",
+            videoId: "7jKXT4Jdvd4",
+            events:{
+                onReady: onPlayerReady,
+                onStateChange: onPlayerStateChange
+            }
+        });
+    }
+
+    //autoplay video
+    function onPlayerReady(event){
+        event.target.playVideo();
+    }
+
+    //when video ends
+    function onPlayerStateChange(event){
+        if(event.data===0){
+            window.location="http://127.0.0.1:8000/";
+        }
+    }
+</script>
 
 </body>
 </html>
