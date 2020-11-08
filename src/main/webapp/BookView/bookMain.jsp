@@ -13,15 +13,15 @@
     <link href="${pageContext.request.contextPath}/css/bookMain.css" rel="stylesheet" type="text/css">
 </head>
 <body>
-<%@include file="../BookView/Main.jsp" %>
+<%@include file="../DefaultView/Main.jsp" %>
 
 <div class="contents">
     <div class="divsize">
-        <h2>책 정보 관리</h2>
-        <hr>
+        <h2><a href="${pageContext.request.contextPath}/BookView/bookMain.jsp">책 정보 관리</a></h2>
+        <hr class="hrPink">
         <div>
             <fieldset class="bookLookup">
-                <form class="formsize" action="/bookMain" method="POST">
+                <form class="formsize" action="/bookMain" method="POST" accept-charset="UTF-8">
                     <div class="form-inline">
                         <div class="inputGroup1">
                             <h3>도서 검색</h3>
@@ -50,68 +50,64 @@
             </fieldset>
         </div>
 
-        <hr>
-        <form action="/deletebook" method="POST">
-            <table class="bookTableHeader">
-                <tr>
-                    <td align="center">
+        <hr class="hrPink">
 
-                        <div style="width: 100%; height:20px;">
-                            <table width="100%" class="firstRow" cellspacing="1">
-                                <tr align="center" height="20">
-                                    <th>No.</th>
-                                    <th>ID</th>
-                                    <th>이미지</th>
-                                    <th>제목</th>
-                                    <th>저자</th>
-                                    <th>별점</th>
-                                    <th>요약설명</th>
-                                    <th>출판사</th>
-                                    <th>선택</th>
-                                </tr>
-                            </table>
-                        </div>
-                        <%--이까지 테이블 헤더 고정 끝--%>
-                        <%--이까지 테이블 바디 스크롤 시작--%>
+        <table class="bookTableHeader">
+            <tr>
+                <td align="center">
 
-                        <br> <!--헤더랑 바디 간격 띄우려고 추가-->
+                    <div style="width: 100%; height:20px;">
+                        <table width="100%" class="firstRow" cellspacing="1">
+                            <tr align="center" height="20">
+                                <th>No.</th>
+                                <th>ID</th>
+                                <th>이미지</th>
+                                <th>제목</th>
+                                <th>저자</th>
+                                <th>별점</th>
+                                <th>요약설명</th>
+                                <th>출판사</th>
+                                <th>선택</th>
+                            </tr>
+                        </table>
+                    </div>
+                    <%--이까지 테이블 헤더 고정 끝--%>
+                    <%--이까지 테이블 바디 스크롤 시작--%>
 
-                        <div style="overflow: auto;width: 100%;height: 200px;">
-                            <table class="tableBody" width="100%" ; cellspacing="1" border="1" style="table-layout: fixed">
-                                <%
-                                    //no.부분 수정필요
-                                    if (request.getAttribute("bookList") != null) {
-                                        int n =  4;
-                                        ArrayList<Book> arr = (ArrayList<Book>) request.getAttribute("bookList");
-                                        for (Book bookList : arr) {
-                                            pageContext.setAttribute("bookList", bookList);
-                                %>
-                                <tr>
-                                    <td>${Integer.toString(n)}</td>
-                                    <td name = "id">${bookList.bookId}</td>
-                                    <td>${bookList.bookCoverUrl}</td>
-                                    <td>${bookList.title}</td>
-                                    <td>${bookList.author}</td>
-                                    <td>${bookList.starRating}</td>
-                                    <td>${bookList.summarize}</td>
-                                    <td>${bookList.publisher}</td>
-                                    <td><input type="radio" name="selected"></td>
-                                </tr>
-                                <%
-                                            n++;
-                                        }
+                    <br> <!--헤더랑 바디 간격 띄우려고 추가-->
+
+                    <div style="overflow: auto;width: 100%;height: 200px;">
+                        <table class="tableBody" width="100%" ; cellspacing="1" border="1" style="table-layout: fixed">
+                            <%
+                                //no.부분 수정필요
+                                if (request.getAttribute("bookList") != null) {
+                                    int n =  4;
+                                    ArrayList<Book> arr = (ArrayList<Book>) request.getAttribute("bookList");
+                                    for (Book bookList : arr) {
+                                        pageContext.setAttribute("bookList", bookList);
+                            %>
+                            <tr>
+                                <td>${Integer.toString(n)}</td>
+                                <td>${bookList.bookId}</td>
+                                <td>${bookList.bookCoverUrl}</td>
+                                <td>${bookList.title}</td>
+                                <td>${bookList.author}</td>
+                                <td>${bookList.starRating}</td>
+                                <td>${bookList.summarize}</td>
+                                <td>${bookList.publisher}</td>
+                                <td><input type="radio" name="selected"></td>
+                            </tr>
+                            <%
+                                        n++;
                                     }
-                                %>
-                            </table>
-                        </div>
-                        <!--테이블 내용 스크롤 끝-->
-                    </td>
-                </tr>
-            </table>
-            <input class="deleteBtn" type="submit" value="삭제"></a> <%--<a href="Main.jsp">--%>
-        </form>
-
-
+                                }
+                            %>
+                        </table>
+                    </div>
+                    <!--테이블 내용 스크롤 끝-->
+                </td>
+            </tr>
+        </table>
         <%--밑에 처럼 변경해서 서블릿으로 값 받아와야되요-->
 <%--            <tbody>--%>
         <%--            <tr class="bookList">--%>
@@ -129,7 +125,7 @@
         <%--        </table>--%>
 
         <%--        <input class="deleteBtn" type="button" value="삭제" onclick="remove()"> <!--onclick()에 메서드 차후에 변경 요망-->--%>
-<%--        <a href="Main.jsp"><input class="deleteBtn" type="button" value="삭제" onclick="remove()"></a>--%>
+        <a href="../DefaultView/Main.jsp"><input class="deleteBtn" type="button" value="삭제" onclick="remove()"></a>
     </div>
 </div>  <!-- 내용 div 끝 마진을 왼쪽에서 190px 띄우는 div 끝-->
 

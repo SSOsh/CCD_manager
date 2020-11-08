@@ -54,7 +54,7 @@ public class itemmanage {
                 System.out.println("상품설명 : " + getTagValue("description", eElement));
                 System.out.println("정가 : " + getTagValue("priceStandard", eElement));
                 System.out.println("커버 : " + getTagValue("cover", eElement));
-                System.out.println("출파낫  : " + getTagValue("publisher", eElement));
+                System.out.println("출판사  : " + getTagValue("publisher", eElement)); //11.01 승환 출판사 오타 수정
             }	// for end
         }	// if end
 
