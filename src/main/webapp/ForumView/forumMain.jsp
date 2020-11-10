@@ -92,9 +92,9 @@
             </tr>
         </table>
 
-        <a href="../DefaultView/Main.jsp"><input class="registerBtn" type="button" value="등록" onclick="register()"></a>
-        <a href="../DefaultView/Main.jsp"><input class="modifyBtn" type="button" value="수정" onclick="modify()"></a>
-        <a href="../DefaultView/Main.jsp"><input class="deleteBtn" type="button" value="삭제" onclick="remove()"></a>
+        <a href="../ForumView/forumReg.jsp"><input class="registerBtn" type="button" value="등록" onclick=""></a>
+        <a href="../ForumView/forumModi.jsp"><input class="modifyBtn" type="button" value="수정" onclick=""></a>
+        <a href="../ForumView/forumMain.jsp"><input class="deleteBtn" type="button" value="삭제" onclick=""></a>
     </div>
 </div>  <!-- 내용 div 끝 마진을 왼쪽에서 190px 띄우는 div 끝-->
 

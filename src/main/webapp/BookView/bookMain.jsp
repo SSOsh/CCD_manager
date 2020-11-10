@@ -125,7 +125,7 @@
         <%--        </table>--%>
 
         <%--        <input class="deleteBtn" type="button" value="삭제" onclick="remove()"> <!--onclick()에 메서드 차후에 변경 요망-->--%>
-        <a href="../DefaultView/Main.jsp"><input class="deleteBtn" type="button" value="삭제" onclick="remove()"></a>
+        <a href="../BookView/bookMain.jsp"><input class="deleteBtn" type="button" value="삭제" onclick="remove()"></a>
     </div>
 </div>  <!-- 내용 div 끝 마진을 왼쪽에서 190px 띄우는 div 끝-->
 

@@ -20,9 +20,41 @@
 
         <hr class="hrPink">
 
-<%--        승환 11-06 만들다 멈춘 등록화면--%>
-        승환 11-06 만들다 멈춘 등록화면
+        <div>
+            <fieldset class="nReg">
+                <form class="" action="/bookMain" method="POST" accept-charset="UTF-8">
+                    <div class="">
+                        <div class="">
+                            <h3>공지사항 등록</h3>
+                        </div>
 
+                        <div class="">
+                            <div class="formRows">
+                                <span class="" id="base-addon1">제목</span>
+                            </div>
+                            <input type="text" class="ipContents" placeholder="공지사항 제목 입력"
+                                   name="title"> <%--aria-describedby="base-addon1" autocomplete="off"--%>
+
+                            <div class="formRows">
+                                <span class="" id="base-addon2">구분</span>
+                            </div>
+                            <input type="text" class="ipContents" placeholder="공지사항 구분 입력"
+                                   name="title"> <%--aria-describedby="base-addon1" autocomplete="off"--%>
+
+                            <div class="formRows">
+                                <span class="" id="base-addon3">공지사항 내용</span>
+                            </div>
+                            <textarea rows="20" cols="130" class="ipContents"></textarea>
+                        </div>
+
+                        <div class="formBtn">
+                            <br>
+                            <button type="submit" class="inquiryBtn">완료</button>
+                        </div>
+                    </div>
+                </form>
+            </fieldset>
+        </div>
 
         <a href="../NoticeView/noticeMain.jsp"><input class="prevBtn" type="button" value="이전" onclick=""></a>
     </div>

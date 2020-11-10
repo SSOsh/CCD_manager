@@ -118,7 +118,7 @@
             </tr>
         </table>
 
-        <a href="../DefaultView/Main.jsp"><input class="deleteBtn" type="button" value="삭제" onclick="remove()"></a>
+        <a href="../MemberView/memberMain.jsp"><input class="deleteBtn" type="button" value="삭제" onclick="remove()"></a>
     </div>
 </div>  <!-- 내용 div 끝 마진을 왼쪽에서 190px 띄우는 div 끝-->
 

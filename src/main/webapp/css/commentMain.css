@@ -7,7 +7,8 @@
 
     margin: 0 auto;
     margin-left: 20px;
-    margin-top: 10px;
+    /*margin-top: 10px;*/
+    margin-top: 40px;
     width: 300px;
 
     float: left;
@@ -27,6 +28,8 @@
 
     margin: 0 auto;
     margin-left: 50px;
+
+    margin-top: 25px;
 
     width: 300px;
 
@@ -71,14 +74,8 @@
     text-align: center;
 }
 
-.deleteBtn {
-    border: 2px solid rgb(245, 171, 221);
-    background-color: rgb(241, 190, 225);
-    color: rgb(255, 255, 255);
-    font-size: 20px;
-    border-radius: 10px;
-    padding: 10px;
-    margin-top: 10px;
+.postBody{
+    text-align: left;
 }
 
 .registerBtn {
@@ -99,6 +96,27 @@
     border-radius: 10px;
     padding: 10px;
     margin-top: 10px;
+}
+
+.deleteBtn {
+    border: 2px solid rgb(245, 171, 221);
+    background-color: rgb(241, 190, 225);
+    color: rgb(255, 255, 255);
+    font-size: 20px;
+    border-radius: 10px;
+    padding: 10px;
+    margin-top: 10px;
+}
+
+.prevBtn {
+    border: 2px solid rgb(245, 171, 221);
+    background-color: rgb(241, 190, 225);
+    color: rgb(255, 255, 255);
+    font-size: 20px;
+    border-radius: 10px;
+    padding: 10px;
+    margin-top: 10px;
+    text-align: center;
 }
 
 .firstRow {

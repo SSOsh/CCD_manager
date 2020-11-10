@@ -28,9 +28,9 @@
 
                         <div class="inputGroup2">
                             <div class="inputGroup-prepend">
-                                <span class="input-group-text" id="base-addon1">게시판 이름</span>
+                                <span class="input-group-text" id="base-addon1">게시판명</span>
                             </div>
-                            <input type="text" class="form-control" placeholder="게시판 이름 입력"
+                            <input type="text" class="form-control" placeholder="게시판명 입력"
                                    name="title"> <%--aria-describedby="base-addon1" autocomplete="off"--%>
 
                             <div class="inputGroup-prepend">
@@ -40,7 +40,7 @@
                                    name="title"> <%--aria-describedby="base-addon1" autocomplete="off"--%>
 
                             <div class="inputGroup-prepend">
-                                <span class="input-group-text" id="base-addon3">작성자 닉네임</span>
+                                <span class="input-group-text" id="base-addon3">닉네임</span>
                             </div>
                             <input type="text" class="form-control" placeholder="작성자 닉네임 입력"
                                    name="title"> <%--aria-describedby="base-addon1" autocomplete="off"--%>
@@ -106,7 +106,6 @@
             </tr>
         </table>
 
-        <a href="../PostView/postMain.jsp"><input class="registerBtn" type="button" value="등록" onclick=""></a>
         <a href="../PostView/postMain.jsp"><input class="deleteBtn" type="button" value="삭제" onclick=""></a>
     </div>
 </div>  <!-- 내용 div 끝 마진을 왼쪽에서 190px 띄우는 div 끝-->
