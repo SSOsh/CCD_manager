@@ -21,7 +21,7 @@
         <hr class="hrPink">
         <div>
             <fieldset class="bookLookup">
-                <form class="formsize" action="/bookMain" method="POST" accept-charset="UTF-8">
+                <form class="formsize" action="/bookMain.jsp" method="POST" accept-charset="UTF-8">
                     <div class="form-inline">
                         <div class="inputGroup1">
                             <h3>도서 검색</h3>

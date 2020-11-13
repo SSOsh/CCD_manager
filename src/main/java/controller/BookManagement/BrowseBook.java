@@ -11,7 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.ArrayList;
 
-@WebServlet("/bookMain")
+@WebServlet("/bookMain.jsp")
 public class BrowseBook extends HttpServlet
 {
     BookDBManager dbManager= new BookDBManager();
