@@ -17,7 +17,6 @@ public class BookDBManager extends DBConnector
     }
 
     //책 정보 관리 클릭하자 마자 전체 책 리스트 조회
-    //아직 서블릿 구현 안함
     public ArrayList<Book> browseBookList()
     {
         try
@@ -49,7 +48,6 @@ public class BookDBManager extends DBConnector
             return null;
         }
     }
-
 
     public ArrayList<Book> searchBookList(String t, String a)
     {
@@ -86,24 +84,23 @@ public class BookDBManager extends DBConnector
         }
     }
 
-//    //책 정보 삭제
-//    public boolean deleteBookInfo(Book book)
-//    {
-//        try
-//        {
-//            String query = "call ccd.deleteBook(?)";
-//            pstmt = conn.prepareStatement(query);
-//            pstmt.setInt(1, book.getBookId());
-//            int result = pstmt.executeUpdate();
-//
-//            return true;
-//        }
-//        catch(SQLException e)
-//        {
-//            e.getStackTrace();
-//            System.out.println("error");
-//            return false;
-//        }
-//    }
+    //20-11-17 승환 완료
+    //책 정보 삭제
+    public void deleteBookInfo(String id)
+    {
+        try
+        {
+            String query = "delete from ccd.book where book.bookID ="+id;
+            pstmt = conn.prepareStatement(query);
+            pstmt.executeUpdate();
+
+            System.out.println("Delete Success");
+        }
+        catch(SQLException e)
+        {
+            e.getStackTrace();
+            System.out.println("SQL error");
+        }
+    }
 
 }

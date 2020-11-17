@@ -44,7 +44,7 @@
                             <div class="formRows">
                                 <span class="" id="base-addon3">공지사항 내용</span>
                             </div>
-                            <textarea rows="20" cols="130" class="ipContents"></textarea>
+                            <textarea rows="20" cols="130" class="ipContents" name="noticeContents"></textarea>
                         </div>
 
                         <div class="formBtn">
