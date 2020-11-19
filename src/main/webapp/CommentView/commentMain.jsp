@@ -1,3 +1,5 @@
+<%@ page import="model.Comment" %>
+<%@ page import="java.util.ArrayList" %>
 <%--
   Created by IntelliJ IDEA.
   User: LG
@@ -10,17 +12,24 @@
 <head>
     <title>북돋다 관리자 페이지</title>
     <link href="${pageContext.request.contextPath}/css/commentMain.css" rel="stylesheet" type="text/css">
+    <script language="javascript">
+        //삭제버튼 메서드
+        //팝업 띄우는 거
+        function popUp(){
+            alert("성공적으로 삭제되었습니다!")
+        }
+    </script>
 </head>
 <body>
 <%@include file="../DefaultView/Main.jsp" %>
 
 <div class="contents">
+    <form class="formsize" method="POST" accept-charset="UTF-8">
     <div class="divsize">
         <h2><a href="${pageContext.request.contextPath}/CommentView/commentMain.jsp">댓글 관리</a></h2>
         <hr class="hrPink">
         <div>
             <fieldset class="bookLookup">
-                <form class="formsize" action="/bookMain" method="POST" accept-charset="UTF-8">
                     <div class="form-inline">
                         <div class="inputGroup1">
                             <h3>댓글 조회</h3>
@@ -31,27 +40,26 @@
                                 <span class="input-group-text" id="base-addon1">댓글 ID</span>
                             </div>
                             <input type="text" class="form-control" placeholder="댓글 ID 입력"
-                                   name="title"> <%--aria-describedby="base-addon1" autocomplete="off"--%>
+                                   name="cID"> <%--aria-describedby="base-addon1" autocomplete="off"--%>
 
                             <div class="inputGroup-prepend">
                                 <span class="input-group-text" id="base-addon2">게시물 ID</span>
                             </div>
                             <input type="text" class="form-control" placeholder="게시물 ID 입력"
-                                   name="title"> <%--aria-describedby="base-addon1" autocomplete="off"--%>
+                                   name="pID"> <%--aria-describedby="base-addon1" autocomplete="off"--%>
 
                             <div class="inputGroup-prepend">
                                 <span class="input-group-text" id="base-addon3">작성자 ID</span>
                             </div>
                             <input type="text" class="form-control" placeholder="작성자 ID 입력"
-                                   name="title"> <%--aria-describedby="base-addon1" autocomplete="off"--%>
+                                   name="mID"> <%--aria-describedby="base-addon1" autocomplete="off"--%>
                         </div>
 
                         <div class="inputGroup3">
                             <br>
-                            <button type="submit" class="inquiryBtn">검색</button>
+                            <input type="submit" class="inquiryBtn" value="검색" formaction="/LookupComment">
                         </div>
                     </div>
-                </form>
             </fieldset>
         </div>
 
@@ -65,11 +73,11 @@
                         <table width="100%" class="firstRow" cellspacing="1">
                             <tr align="center" height="20">
                                 <th width="5%">No.</th>
-                                <th width="10%">게시판</th> <!--무슨 게시판인지 이름, forum name -->
-                                <th width="20%">게시물 제목</th> <!--무슨 인지 이름, post.title -->
-                                <th width="10%">닉네임</th>
-                                <th width="40%">내용</th>
-                                <th width="10%">날짜</th>
+                                <th width="10%">댓글 ID</th> <!--무슨 게시판인지 이름, forum name -->
+                                <th width="10%">게시물 ID</th> <!--무슨 게시물인지 이름, post.title -->
+                                <th width="10%">작성자 ID</th>
+                                <th width="45%">내용</th>
+                                <th width="15%">날짜</th>
                                 <th width="5%">선택</th>
                             </tr>
                         </table>
@@ -77,60 +85,40 @@
                     <%--이까지 테이블 헤더 고정 끝--%>
                     <%--이까지 테이블 바디 스크롤 시작--%>
                     <br> <!--헤더랑 바디 간격 띄우려고 추가-->
-
                     <div style="overflow: auto;width: 100%;height: 200px;">
                         <table class="tableBody" width="100%" ; cellspacing="1" border="1" style="table-layout: fixed">
-                            <!--11 10 승환 추가한 예시에유-->
+                            <%
+                                //no.부분 수정필요
+                                if (request.getAttribute("commentList") != null) {
+                                    int n =  4;
+                                    ArrayList<Comment> arr = (ArrayList<Comment>) request.getAttribute("commentList");
+                                    for (Comment commentList : arr) {
+                                        pageContext.setAttribute("commentList", commentList);
+                            %>
                             <tr>
-                                <td width="5%">1</td>
-                                <td width="10%">자유게시판</td>
-                                <td width="20%">책 바꿔서 읽으실 분 구함</td>
-                                <td width="10%">팀버지박령</td>
-                                <td width="40%">지금도 구하시나요?!!</td>
-                                <td width="10%">2020-11-10</td>
-                                <td width="5%"><input type="radio" name="selected"></td>
+                                <td width="5%">${Integer.toString(n)}</td>
+                                <td width="10%">${commentList.commentID}</td>
+                                <td width="10%">${commentList.postID}</td>
+                                <td width="10%">${commentList.memdberID}</td>
+                                <td width="45%">${commentList.TEXT}</td>
+                                <td width="15%">${commentList.date}</td>
+                                <td width="5%"><input type="radio" name="selected" value="${commentList.commentID}"></td>
                             </tr>
-
-                            <tr>
-                                <td width="5%">2</td>
-                                <td width="10%">자유게시판</td>
-                                <td width="20%">책 바꿔서 읽으실 분 구함</td>
-                                <td width="10%">리렁구</td>
-                                <td width="40%">저 책이 없는데 교환가능한가요?</td>
-                                <td width="10%">2020-11-10</td>
-                                <td width="5%"><input type="radio" name="selected"></td>
-                            </tr>
-
-                            <tr>
-                                <td width="5%">3</td>
-                                <td width="10%">자유게시판</td>
-                                <td width="20%">좋은 책 공유해요~</td>
-                                <td width="10%">팀버지박령</td>
-                                <td width="40%">혹시 추천하시는 책 있나요?</td>
-                                <td width="10%">2020-11-10</td>
-                                <td width="5%"><input type="radio" name="selected"></td>
-                            </tr>
-
-                            <tr>
-                                <td width="5%">4</td>
-                                <td width="10%">자유게시판</td>
-                                <td width="20%">좋은 책 공유해요~</td>
-                                <td width="10%">팀버지박령</td>
-                                <td width="40%">해리포터 추천드려요ㅎㅎ</td>
-                                <td width="10%">2020-11-10</td>
-                                <td width="5%"><input type="radio" name="selected"></td>
-                            </tr>
-
-                            <!--11 10 승환 추가한 예시에유-->
+                            <%
+                                        n++;
+                                    }
+                                }
+                            %>
                         </table>
                     </div>
                     <!--테이블 내용 스크롤 끝-->
                 </td>
             </tr>
         </table>
-
-        <a href="../CommentView/commentMain.jsp"><input class="deleteBtn" type="button" value="삭제" onclick=""></a>
+        <%-- form태그에서 action지정안해줘도 formaction으로 분리시켜서 매핑가능 --%>
+        <input type="submit" class="deleteBtn" value="삭제" formaction="/DeleteComment" onclick="popUp()">
     </div>
+    </form>
 </div>  <!-- 내용 div 끝 마진을 왼쪽에서 190px 띄우는 div 끝-->
 
 </body>
