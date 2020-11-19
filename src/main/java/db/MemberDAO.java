@@ -1,6 +1,5 @@
 package db;
 
-import model.Book;
 import model.Member;
 import java.sql.SQLException;
 import java.util.ArrayList;

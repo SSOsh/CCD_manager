@@ -1,5 +1,6 @@
 <%@ page import="model.Member" %>
-<%@ page import="java.util.ArrayList" %><%--
+<%@ page import="java.util.ArrayList" %>
+<%--
   Created by IntelliJ IDEA.
   User: LG
   Date: 2020-10-27
