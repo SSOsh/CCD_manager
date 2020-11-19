@@ -131,3 +131,14 @@
     margin-top: 10px;
     text-align: center;
 }
+
+.modifyBtn2 {
+    border: 2px solid rgb(245, 171, 221);
+    background-color: rgb(241, 190, 225);
+    color: rgb(255, 255, 255);
+    font-size: 20px;
+    border-radius: 10px;
+    padding: 10px;
+    margin-top: 10px;
+    margin-right: 300px;
+}

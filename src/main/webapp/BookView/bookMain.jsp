@@ -51,7 +51,7 @@
 
                         <div class="inputGroup3">
                             <br>
-                            <input type="submit" class="inquiryBtn" value="검색" formaction="/BrowseBook">
+                            <input type="submit" class="inquiryBtn" value="검색" formaction="/LookupBook">
                         </div>
                     </div>
             </fieldset>
@@ -66,15 +66,15 @@
                     <div style="width: 100%; height:20px;">
                         <table width="100%" class="firstRow" cellspacing="1">
                             <tr align="center" height="20">
-                                <th>No.</th>
-                                <th>ID</th>
-                                <th>이미지</th>
-                                <th>제목</th>
-                                <th>저자</th>
-                                <th>별점</th>
-                                <th>요약설명</th>
-                                <th>출판사</th>
-                                <th>선택</th>
+                                <th width="5%">No.</th>
+                                <th width="5%">ID</th>
+                                <th width="20%">이미지</th>
+                                <th width="10%">제목</th>
+                                <th width="10%">저자</th>
+                                <th width="5%">별점</th>
+                                <th width="30%">요약설명</th>
+                                <th width="10%">출판사</th>
+                                <th width="5%">선택</th>
                             </tr>
                         </table>
                     </div>
@@ -94,15 +94,15 @@
                                         pageContext.setAttribute("bookList", bookList);
                             %>
                             <tr>
-                                <td>${Integer.toString(n)}</td>
-                                <td>${bookList.bookId}</td>
-                                <td>${bookList.bookCoverUrl}</td>
-                                <td>${bookList.title}</td>
-                                <td>${bookList.author}</td>
-                                <td>${bookList.starRating}</td>
-                                <td>${bookList.summarize}</td>
-                                <td>${bookList.publisher}</td>
-                                <td><input type="radio" name="selected" value="${bookList.bookId}"></td>
+                                <td width="5%">${Integer.toString(n)}</td>
+                                <td width="5%">${bookList.bookId}</td>
+                                <td width="20%">${bookList.bookCoverUrl}</td>
+                                <td width="10%">${bookList.title}</td>
+                                <td width="10%">${bookList.author}</td>
+                                <td width="5%">${bookList.starRating}</td>
+                                <td width="30%">${bookList.summarize}</td>
+                                <td width="10%">${bookList.publisher}</td>
+                                <td width="5%"><input type="radio" name="selected" value="${bookList.bookId}"></td>
                             </tr>
                             <%
                                         n++;

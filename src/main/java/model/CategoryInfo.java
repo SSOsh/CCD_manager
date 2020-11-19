@@ -8,5 +8,4 @@ public class CategoryInfo {
     private String CategoryDepth1;
     private String CategoryDepth2;
     private String CategoryDepth3;
-
 }

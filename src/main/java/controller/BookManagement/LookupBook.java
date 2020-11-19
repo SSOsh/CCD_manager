@@ -1,6 +1,6 @@
 package controller.BookManagement;
 
-import db.BookDBManager;
+import db.BookDAO;
 import model.Book;
 
 import javax.servlet.ServletException;
@@ -15,10 +15,10 @@ import java.util.ArrayList;
 //20-11-16 승환 - Apache 폴더안에 mySQL DB Connecter.lib의 버전이 안맞아서 그랬었음 ==> 해결 ㄱㅇㄷ
 
 
-@WebServlet("/BrowseBook") //연동할 jsp 혹은 컨트롤러 명을 명시해주면 된다.
-public class BrowseBook extends HttpServlet
+@WebServlet("/LookupBook") //연동할 jsp 혹은 컨트롤러 명을 명시해주면 된다.
+public class LookupBook extends HttpServlet
 {
-    BookDBManager dbManager= new BookDBManager();
+    BookDAO dao= new BookDAO();
 
     //doPost방식으로 하면 된다.
     @Override
@@ -30,7 +30,7 @@ public class BrowseBook extends HttpServlet
         book.setTitle(req.getParameter("title")); //jsp파일에서 form태그 안에 넘겨주는데 있는 name 속성을 받아오는 것
         book.setAuthor(req.getParameter("author"));
 
-        bookList= dbManager.searchBookList(book.getTitle(),book.getAuthor());
+        bookList= dao.searchBookList(book.getTitle(),book.getAuthor());
 
         req.setAttribute("bookList",bookList);
         req.getRequestDispatcher("/BookView/bookMain.jsp").forward(req,resp); //목적지 jsp로 받아온 값을 넘겨주는 것

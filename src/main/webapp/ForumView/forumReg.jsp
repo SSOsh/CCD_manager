@@ -10,6 +10,11 @@
 <head>
     <title>북돋다 관리자 페이지</title>
     <link href="${pageContext.request.contextPath}/css/forumMain.css" rel="stylesheet" type="text/css">
+    <script>
+        function goBack(){
+            alert("이전 화면으로 돌아갑니다.")
+        }
+    </script>
 </head>
 <body>
 <%@include file="../DefaultView/Main.jsp" %>
@@ -22,7 +27,7 @@
 
         <div>
             <fieldset class="bookLookup">
-                <form class="formsize" action="/bookMain" method="POST" accept-charset="UTF-8">
+                <form class="formsize" method="POST" accept-charset="UTF-8">
                     <div class="form-inline">
                         <div class="inputGroup1">
                             <h3>게시판 등록</h3>
@@ -34,12 +39,12 @@
                                 <span class="input-group-text" id="base-addon1">게시판명</span>
                             </div>
                             <input type="text" class="form-control" placeholder="게시판명 입력"
-                                   name="title"> <%--aria-describedby="base-addon1" autocomplete="off"--%>
+                                   name="forumTitle"> <%--aria-describedby="base-addon1" autocomplete="off"--%>
                         </div>
 
                         <div class="inputGroup3">
                             <br>
-                            <button type="submit" class="inquiryBtn">등록</button>
+                            <input type="submit" class="inquiryBtn" value="등록" formaction="/EnrollForum">
                         </div>
                     </div>
                 </form>
@@ -47,7 +52,7 @@
         </div>
 
 
-        <a href="../ForumView/forumMain.jsp"><input class="prevBtn" type="button" value="이전" onclick=""></a>
+        <a href="../ForumView/forumMain.jsp"><input class="prevBtn" type="button" value="이전" onclick="goBack()"></a>
     </div>
 </div>  <!-- 내용 div 끝 마진을 왼쪽에서 190px 띄우는 div 끝-->
 

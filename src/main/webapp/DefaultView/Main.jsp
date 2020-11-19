@@ -23,7 +23,7 @@
 </head>
 
 <body>
-<h1><a href="${pageContext.request.contextPath}/DefaultView/Main.jsp">북돋다 관리자 페이지</a></h1> <!--클릭하면 새로고침되게 했음-->
+<h1><a href="${pageContext.request.contextPath}/DefaultView/homeMain.jsp">북돋다 관리자 페이지</a></h1> <!--클릭하면 새로고침되게 했음-->
 <hr class="myhr">
     <div id="mySidenav" class="sidenav">
         <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>

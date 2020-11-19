@@ -6,9 +6,9 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.regex.Pattern;
 
-public class BookDBManager extends DBConnector
+public class BookDAO extends DBConnector
 {
-    public BookDBManager() {
+    public BookDAO() {
         try {
             stmt = conn.createStatement();
         } catch (SQLException throwables) {
@@ -17,7 +17,7 @@ public class BookDBManager extends DBConnector
     }
 
     //책 정보 관리 클릭하자 마자 전체 책 리스트 조회
-    public ArrayList<Book> browseBookList()
+    public ArrayList<Book> lookupBookList()
     {
         try
         {
@@ -55,7 +55,7 @@ public class BookDBManager extends DBConnector
         {
             if(t==null && a==null)
             {
-                browseBookList();
+                lookupBookList();
             }
             String query= "SELECT * FROM ccd.book WHERE title LIKE \"%"+ t +"%\" and author LIKE \"%"+ a +"%\"";
             res=stmt.executeQuery(query);
