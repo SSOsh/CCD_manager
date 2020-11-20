@@ -185,3 +185,20 @@
 .formBtn{
     margin-left: 850px;
 }
+
+.inquiryBtn2 {
+    border: 2px solid rgb(245, 171, 221);
+    background-color: rgb(241, 190, 225);
+    color: rgb(255, 255, 255);
+    font-size: 20px;
+    border-radius: 10px;
+    padding: 10px;
+    margin-top: 10px;
+}
+
+.myInput{
+    border: 0;
+    outline: 0;
+    background: #fae4ef;
+    text-underline: hotpink;
+}

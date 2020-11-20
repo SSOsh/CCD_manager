@@ -7,6 +7,7 @@ public class Notice {
     private int noticeID;
     private String title;
     private String contents;
+    private String division; //20-11-20 승환 공지사항 구분 추가했어유
     private String date;
 
     public int getNoticeID() {
@@ -31,6 +32,14 @@ public class Notice {
 
     public void setContents(String contents) {
         this.contents = contents;
+    }
+
+    public String getDivision(){
+        return division;
+    }
+
+    public void setDivision(String division){
+        this.division = division;
     }
 
     public String getDate() {

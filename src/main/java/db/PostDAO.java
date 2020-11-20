@@ -121,7 +121,7 @@ public class PostDAO extends DBConnector
             res=stmt.executeQuery(query);
             ArrayList<Post> list=new ArrayList<Post>();     //실행한 객체를 담을 list
 
-            while(res.next())       //얻어온 테이블의 행이 끝날때 까지
+            if (res.next())       //예외처리할려고 if로 변경함
             {
                 Post post=new Post();
 

@@ -10,6 +10,11 @@
 <head>
     <title>북돋다 관리자 페이지</title>
     <link href="${pageContext.request.contextPath}/css/noticeMain.css" rel="stylesheet" type="text/css">
+    <script>
+        function goBack(){
+            alert("이전 화면으로 돌아갑니다.")
+        }
+    </script>
 </head>
 <body>
 <%@include file="../DefaultView/Main.jsp" %>
@@ -33,13 +38,13 @@
                                 <span class="" id="base-addon1">제목</span>
                             </div>
                             <input type="text" class="ipContents" placeholder="공지사항 제목 입력"
-                                   name="title"> <%--aria-describedby="base-addon1" autocomplete="off"--%>
+                                   name="noticeTitle"> <%--aria-describedby="base-addon1" autocomplete="off"--%>
 
                             <div class="formRows">
                                 <span class="" id="base-addon2">구분</span>
                             </div>
                             <input type="text" class="ipContents" placeholder="공지사항 구분 입력"
-                                   name="title"> <%--aria-describedby="base-addon1" autocomplete="off"--%>
+                                   name="noticeDivision"> <%--aria-describedby="base-addon1" autocomplete="off"--%>
 
                             <div class="formRows">
                                 <span class="" id="base-addon3">공지사항 내용</span>
@@ -49,14 +54,14 @@
 
                         <div class="formBtn">
                             <br>
-                            <button type="submit" class="inquiryBtn">완료</button>
+                            <input type="submit" class="inquiryBtn" value="등록" formaction="/EnrollNotice">
                         </div>
                     </div>
                 </form>
             </fieldset>
         </div>
 
-        <a href="../NoticeView/noticeMain.jsp"><input class="prevBtn" type="button" value="이전" onclick=""></a>
+        <a href="../NoticeView/noticeMain.jsp"><input class="prevBtn" type="button" value="이전" onclick="goBack()"></a>
     </div>
 </div>  <!-- 내용 div 끝 마진을 왼쪽에서 190px 띄우는 div 끝-->
 
