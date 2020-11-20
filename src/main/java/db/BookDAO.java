@@ -6,9 +6,9 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.regex.Pattern;
 
-public class BookDBManager extends DBConnector
+public class BookDAO extends DBConnector
 {
-    public BookDBManager() {
+    public BookDAO() {
         try {
             stmt = conn.createStatement();
         } catch (SQLException throwables) {

@@ -68,6 +68,7 @@ public class httpURLConnection extends HttpServlet {
 //        }
 
 
+
         //앱으로 줄 값 처리
         JSONObject jsonObject = new JSONObject();
         //여기서 for문 돌리면서 값 넣으면 될 듯
