@@ -96,4 +96,5 @@ public class search {
             System.out.println(item.Title + " : " + item.Link);
         }
     }
+
 }

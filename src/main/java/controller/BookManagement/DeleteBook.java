@@ -1,6 +1,6 @@
 package controller.BookManagement;
 
-import db.BookDBManager;
+import db.BookDAO;
 import model.Book;
 
 import javax.servlet.ServletException;
@@ -14,7 +14,7 @@ import java.util.ArrayList;
 @WebServlet("/deletebook")
 class Deletebook extends HttpServlet
 {
-    BookDBManager dbManager= new BookDBManager();
+    BookDAO dbManager= new BookDAO();
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws IOException, ServletException
