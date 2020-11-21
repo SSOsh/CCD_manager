@@ -32,7 +32,7 @@
         <a href="${pageContext.request.contextPath}/CategoryView/categoryMain.jsp">카테고리 관리</a>
         <a href="${pageContext.request.contextPath}/BestSellerView/bestSellerMain.jsp">베스트셀러 조회</a>
 <%--        <a href="${pageContext.request.contextPath}/VideoView/videoMain.jsp">도서관련영상 조회</a>--%>
-        <a href="${pageContext.request.contextPath}/LookupVideo">도서관련영상 조회</a>
+        <a href="${pageContext.request.contextPath}/VideoView/videoLookup.jsp">도서관련영상 조회</a>
         <a href="${pageContext.request.contextPath}/ForumView/forumMain.jsp">게시판 관리</a>
         <a href="${pageContext.request.contextPath}/PostView/postMain.jsp">게시물 관리</a>
         <a href="${pageContext.request.contextPath}/CommentView/commentMain.jsp">댓글 관리</a>

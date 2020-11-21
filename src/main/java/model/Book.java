@@ -4,7 +4,8 @@ import lombok.Data;
 
 @Data
 public class Book {
-    private int BookId;
+    private int bookID; //11-21 bookID로 네이밍 변경
+    private String categoryID; //11-21 categoryID 추가함
     private double starRating;
     private String title;
     private String table;
@@ -16,12 +17,19 @@ public class Book {
     private String publisher;
 
     //11-02 승환 추가한 부분 -> lombok 없어서 걍 게터세터 일단만들어둘게
-    public int getBookId() {
-        return BookId;
+    public int getBookID() {
+        return bookID;
+    }
+    public void setBookID(int bookID) {
+        this.bookID = bookID;
     }
 
-    public void setBookId(int bookId) {
-        BookId = bookId;
+    public String getCategoryID() {
+        return categoryID;
+    }
+
+    public void setCategoryID(String categoryID) {
+        this.categoryID = categoryID;
     }
 
     public double getStarRating() {

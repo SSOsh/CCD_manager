@@ -1,7 +1,7 @@
-package controller.NoticeManagement;
+package controller.CategoryManagement;
 
-import db.NoticeDAO;
-import model.Notice;
+import db.CategoryInfoDAO;
+import model.CategoryInfo;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -11,37 +11,39 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.ArrayList;
 
-@WebServlet("/ModifyNotice") //연동할 jsp 혹은 컨트롤러 명을 명시해주면 된다.
-public class ModifyNotice extends HttpServlet
+@WebServlet("/ModifyCategory") //연동할 jsp 혹은 컨트롤러 명을 명시해주면 된다.
+public class ModifyCategory extends HttpServlet
 {
-    NoticeDAO dao= new NoticeDAO();
+    CategoryInfoDAO dao= new CategoryInfoDAO();
 
     //doPost방식으로 하면 된다.
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws IOException, ServletException
     {
         req.setCharacterEncoding("utf-8");
-        ArrayList<Notice> noticeList;
+        ArrayList<CategoryInfo> categoryInfoList;
 
         String modiID =(String) req.getSession().getAttribute("selected"); //세션에서 깨진 값 받아온다.
 
-        System.out.println("입력받은 ID(깨질까유?) : "+modiID); //안깨지넹ㅋㅋ 근데 남겨놓을게
+        System.out.println("입력받은 ID(깨질까유?) : "+modiID); //깨짐
 
-        String nT = req.getParameter("noticeTitle"); //수정할 제목
-        String nD = req.getParameter("noticeDivision"); //수정할 구분
-        String nC =  req.getParameter("noticeContents"); //수정할 내용
+        String cn = req.getParameter("mcn"); //카테고리명
+        String cd1 = req.getParameter("mcd1"); //Depth1
+        String cd2 =  req.getParameter("mcd2"); //Depth2
+        String cd3 =  req.getParameter("mcd3"); //Depth3
 
         String encID=makeKOR(modiID); //밑에 정의된 인코딩함수 돌려준다.
 
         System.out.println("입력받은 ID(디코딩) : "+encID);
 
-        //수정 실행하는 부분
-        dao.modifyNotice(encID,nT,nD,nC);
+        //수정 실행
+        dao.modifyCategoryInfo(encID,cn,cd1,cd2,cd3);
 
-        noticeList = dao.lookupNoticeList(); //수정 후 전체 리스트 출력해주기 위해 담아옴
+        //전체 조회로 리스트 받아옴
+        categoryInfoList = dao.lookupCategoryInfoList();
 
-        req.setAttribute("noticeList",noticeList);
-        req.getRequestDispatcher("/NoticeView/noticeMain.jsp").forward(req,resp); //목적지 jsp로 받아온 값을 넘겨주는 것
+        req.setAttribute("categoryInfoList",categoryInfoList);
+        req.getRequestDispatcher("/CategoryView/categoryMain.jsp").forward(req,resp); //목적지 jsp로 받아온 값을 넘겨주는 것
     }
 
     String makeKOR(String str) throws java.io.UnsupportedEncodingException

@@ -30,7 +30,8 @@ public class BookDAO extends DBConnector
             {
                 Book book=new Book();
 
-                book.setBookId(res.getInt("bookId"));
+                book.setBookID(res.getInt("bookID"));
+                book.setCategoryID(res.getString("categoryID"));
                 book.setStarRating(res.getDouble("starRating"));
                 book.setTitle(res.getString("title"));
                 book.setTable(res.getString("table"));
@@ -68,7 +69,8 @@ public class BookDAO extends DBConnector
             {
                 Book book=new Book();
 
-                book.setBookId(res.getInt("bookId"));
+                book.setBookID(res.getInt("bookID"));
+                book.setCategoryID(res.getString("categoryID"));
                 book.setStarRating(res.getDouble("starRating"));
                 book.setTitle(res.getString("title"));
                 book.setTable(res.getString("table"));
@@ -123,7 +125,8 @@ public class BookDAO extends DBConnector
                 {
                     Book book=new Book();
 
-                    book.setBookId(res.getInt("bookId"));
+                    book.setBookID(res.getInt("bookID"));
+                    book.setCategoryID(res.getString("categoryID"));
                     book.setStarRating(res.getDouble("starRating"));
                     book.setTitle(res.getString("title"));
                     book.setTable(res.getString("table"));
