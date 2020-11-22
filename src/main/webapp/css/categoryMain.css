@@ -46,13 +46,14 @@
     background-color: rgb(255, 230, 247);
 }
 
-.inquiryBtn {
+.enrollBtn {
     border: 3px solid rgb(255, 255, 255);
     background-color: rgb(241, 190, 225);
     color: rgb(255, 255, 255);
     font-size: 25px;
     border-radius: 10px;
     padding: 10px;
+    margin-top: 15px;
 }
 
 .bookTable {
@@ -112,4 +113,38 @@
     border: 0;
     height: 2px;
     background: hotpink;
+}
+
+.prevBtn {
+    border: 2px solid rgb(245, 171, 221);
+    background-color: rgb(241, 190, 225);
+    color: rgb(255, 255, 255);
+    font-size: 20px;
+    border-radius: 10px;
+    padding: 10px;
+    margin-top: 10px;
+    text-align: center;
+}
+
+.inquiryBtn {
+    border: 2px solid rgb(245, 171, 221);
+    background-color: rgb(241, 190, 225);
+    color: rgb(255, 255, 255);
+    font-size: 20px;
+    border-radius: 10px;
+    padding: 10px;
+    margin-top: 10px;
+}
+
+.modiBtn {
+    border: 3px solid rgb(255, 255, 255);
+    background-color: rgb(241, 190, 225);
+    color: rgb(255, 255, 255);
+    font-size: 25px;
+    border-radius: 10px;
+    padding: 10px;
+}
+
+.myH3{
+    margin-top: 40px;
 }

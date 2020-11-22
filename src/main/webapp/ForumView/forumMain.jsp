@@ -1,3 +1,5 @@
+<%@ page import="model.Forum" %>
+<%@ page import="java.util.ArrayList" %>
 <%--
   Created by IntelliJ IDEA.
   User: LG
@@ -10,17 +12,32 @@
 <head>
     <title>북돋다 관리자 페이지</title>
     <link href="${pageContext.request.contextPath}/css/forumMain.css" rel="stylesheet" type="text/css">
+    <script language="javascript">
+        //삭제버튼 메서드
+        //팝업 띄우는 거
+        function popUp(){
+            alert("성공적으로 삭제되었습니다!")
+        }
+
+        function mvEnrl(){
+            alert("등록 창으로 이동합니다.")
+        }
+
+        function mvModi(){
+            alert("수정 창으로 이동합니다.")
+        }
+    </script>
 </head>
 <body>
 <%@include file="../DefaultView/Main.jsp" %>
 
 <div class="contents">
+    <form class="formsize" method="POST" accept-charset="UTF-8">
     <div class="divsize">
         <h2><a href="${pageContext.request.contextPath}/ForumView/forumMain.jsp">게시판 관리</a></h2>
         <hr class="hrPink">
         <div>
             <fieldset class="bookLookup">
-                <form class="formsize" action="/bookMain" method="POST" accept-charset="UTF-8">
                     <div class="form-inline">
                         <div class="inputGroup1">
                             <h3>게시판 검색</h3>
@@ -32,15 +49,14 @@
                                 <span class="input-group-text" id="base-addon1">게시판명</span>
                             </div>
                             <input type="text" class="form-control" placeholder="게시판명 입력"
-                                   name="title"> <%--aria-describedby="base-addon1" autocomplete="off"--%>
+                                   name="forumTitle"> <%--aria-describedby="base-addon1" autocomplete="off"--%>
                         </div>
 
                         <div class="inputGroup3">
                             <br>
-                            <button type="submit" class="inquiryBtn">검색</button>
+                            <input type="submit" class="inquiryBtn" value="검색" formaction="/LookupForum">
                         </div>
                     </div>
-                </form>
             </fieldset>
         </div>
 
@@ -64,38 +80,40 @@
 
                     <br> <!--헤더랑 바디 간격 띄우려고 추가-->
 
+                    <%! int i=1;%>
+
                     <div style="overflow: auto;width: 100%;height: 200px;">
                         <table class="tableBody" width="100%" ; cellspacing="1" border="1" style="table-layout: fixed">
-                            <!--11 01 승환 추가한 예시에유-->
+                            <%
+                                if (request.getAttribute("forumList") != null) {
+                                    ArrayList<Forum> arr = (ArrayList<Forum>) request.getAttribute("forumList");
+                                    for (Forum forumList : arr) {
+                                        pageContext.setAttribute("forumList", forumList);
+                            %>
                             <tr>
-                                <td width="10%">0</td>
-                                <td width="80%">자유게시판</td>
-                                <td width="10%"><input type="radio" name="selected"></td>
+                                <td width="10%"><%=i%></td>
+                                <td width="80%">${forumList.forumName}</td>
+                                <td width="10%"><input type="radio" name="selected" value="${forumList.forumName}"></td>
                             </tr>
-
-                            <tr>
-                                <td width="10%">1</td>
-                                <td width="80%">비밀게시판</td>
-                                <td width="10%"><input type="radio" name="selected"></td>
-                            </tr>
-
-                            <tr>
-                                <td width="10%">2</td>
-                                <td width="80%">장터게시판</td>
-                                <td width="10%"><input type="radio" name="selected"></td>
-                            </tr>
-                            <!--11 01 승환 추가한 예시에유-->
+                            <%
+                                        i++;
+                                    }
+                                    i=1;
+                                }
+                            %>
                         </table>
                     </div>
                     <!--테이블 내용 스크롤 끝-->
                 </td>
             </tr>
         </table>
-
-        <a href="../DefaultView/Main.jsp"><input class="registerBtn" type="button" value="등록" onclick="register()"></a>
-        <a href="../DefaultView/Main.jsp"><input class="modifyBtn" type="button" value="수정" onclick="modify()"></a>
-        <a href="../DefaultView/Main.jsp"><input class="deleteBtn" type="button" value="삭제" onclick="remove()"></a>
+        <%-- form태그에서 action지정안해줘도 formaction으로 분리시켜서 매핑가능 --%>
+        <a href="../ForumView/forumReg.jsp"><input class="registerBtn" type="button" value="등록" onclick="mvEnrl()"></a>
+        <%--다른 jsp로 form정보를 보내고 거기서 세션에 값을 저장하는 방식--%>
+        <input class="modifyBtn" type="submit" value="수정" formaction="../ForumView/forumModi.jsp" onclick="mvModi()">
+        <input type="submit" class="deleteBtn" value="삭제" formaction="/DeleteForum" onclick="popUp()">
     </div>
+    </form>
 </div>  <!-- 내용 div 끝 마진을 왼쪽에서 190px 띄우는 div 끝-->
 
 </body>

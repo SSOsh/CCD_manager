@@ -1,3 +1,5 @@
+<%@ page import="model.CategoryInfo" %>
+<%@ page import="java.util.ArrayList" %>
 <%--
   Created by IntelliJ IDEA.
   User: LG
@@ -10,60 +12,84 @@
 <head>
     <title>북돋다 관리자 페이지</title>
     <link href="${pageContext.request.contextPath}/css/categoryMain.css" rel="stylesheet" type="text/css">
+    <script language="javascript">
+        //삭제버튼 메서드
+        //팝업 띄우는 거
+        function popUp(){
+            alert("성공적으로 삭제되었습니다!")
+        }
+
+        function inquiry(){
+            alert("저장된 카테고리 리스트를 불러옵니다.")
+        }
+
+        function mvEnrl(){
+            alert("성공적으로 등록되었습니다!")
+        }
+
+        function mvModi(){
+            alert("수정 창으로 이동합니다.")
+        }
+    </script>
 </head>
 <body>
 <%@include file="../DefaultView/Main.jsp" %>
 
 <div class="contents">
+    <form class="formsize" method="POST" accept-charset="UTF-8">
     <div class="divsize">
-        <h2>카테고리 관리</h2>
+        <h2><a href="${pageContext.request.contextPath}/CategoryView/categoryMain.jsp">카테고리 관리</a></h2>
         <hr class="hrPink">
         <div>
             <fieldset class="bookLookup">
-                <form class="formsize" action="/bookMain" method="POST" accept-charset="UTF-8">
                     <div class="form-inline">
                         <div class="inputGroup1">
-                            <h3>카테고리 등록</h3>
+                            <h3 class="myH3">카테고리 등록</h3>
                         </div>
 
                         <div class="inputGroup2">
                             <div class="inputGroup-prepend">
-                                <span class="input-group-text" id="base-addon1">카테고리명</span>
+                                <span class="input-group-text" id="base-addon1">카테고리 ID</span>
+                            </div>
+                            <input type="text" class="form-control" placeholder="카테고리 ID 입력"
+                                   name="cid"> <%--aria-describedby="base-addon1" autocomplete="off"--%>
+
+                            <div class="inputGroup-prepend">
+                                <span class="input-group-text" id="base-addon2">카테고리명</span>
                             </div>
                             <input type="text" class="form-control" placeholder="카테고리명 입력"
-                                   name="title"> <%--aria-describedby="base-addon1" autocomplete="off"--%>
+                                   name="cn"> <%--aria-describedby="base-addon1" autocomplete="off"--%>
 
                             <div class="inputGroup-prepend">
-                                <span class="input-group-text" id="base-addon2">Depth1</span>
+                                <span class="input-group-text" id="base-addon3">Depth1</span>
                             </div>
                             <input type="text" class="form-control" placeholder="Depth1 입력"
-                                   name="title"> <%--aria-describedby="base-addon1" autocomplete="off"--%>
+                                   name="cd1"> <%--aria-describedby="base-addon1" autocomplete="off"--%>
 
                             <div class="inputGroup-prepend">
-                                <span class="input-group-text" id="base-addon3">Depth2</span>
+                                <span class="input-group-text" id="base-addon4">Depth2</span>
                             </div>
                             <input type="text" class="form-control" placeholder="Depth2 입력"
-                                   name="title"> <%--aria-describedby="base-addon1" autocomplete="off"--%>
+                                   name="cd2"> <%--aria-describedby="base-addon1" autocomplete="off"--%>
 
                             <div class="inputGroup-prepend">
-                                <span class="input-group-text" id="base-addon4">Depth3</span>
+                                <span class="input-group-text" id="base-addon5">Depth3</span>
                             </div>
                             <input type="text" class="form-control" placeholder="Depth3 입력"
-                                   name="author"> <%--aria-describedby="base-addon2" autocomplete="off"--%>
+                                   name="cd3"> <%--aria-describedby="base-addon2" autocomplete="off"--%>
                         </div>
 
                         <div class="inputGroup3">
                             <br>
-                            <button type="submit" class="inquiryBtn">등록</button>
+                            <input type="submit" class="enrollBtn" value="등록" formaction="/EnrollCategory">
                         </div>
                     </div>
-                </form>
             </fieldset>
         </div>
 
         <hr class="hrPink">
         <br>
-        <h2><a href="${pageContext.request.contextPath}/CategoryView/categoryMain.jsp">카테고리 조회</a></h2>
+        <h2>카테고리 조회</h2>
         <table class="bookTableHeader">
             <tr>
                 <td align="center">
@@ -72,7 +98,8 @@
                         <table width="100%" class="firstRow" cellspacing="1">
                             <tr align="center" height="20">
                                 <th width="5%">No.</th>
-                                <th width="30%">카테고리명</th>
+                                <th width="10%">ID</th>
+                                <th width="20%">카테고리명</th>
                                 <th width="20%">Depth1</th>
                                 <th width="20%">Depth2</th>
                                 <th width="20%">Depth3</th>
@@ -84,28 +111,31 @@
                     <%--이까지 테이블 바디 스크롤 시작--%>
                     <br> <!--헤더랑 바디 간격 띄우려고 추가-->
 
+                    <%! int i=1;%>
+
                     <div style="overflow: auto;width: 100%;height: 200px;">
                         <table class="tableBody" width="100%" ; cellspacing="1" border="1" style="table-layout: fixed">
-                            <!--11 04 승환 추가한 예시에유-->
+                            <%
+                                if (request.getAttribute("categoryInfoList") != null) {
+                                    ArrayList<CategoryInfo> arr = (ArrayList<CategoryInfo>) request.getAttribute("categoryInfoList");
+                                    for (CategoryInfo categoryInfoList : arr) {
+                                        pageContext.setAttribute("categoryInfoList", categoryInfoList);
+                            %>
                             <tr>
-                                <td width="5%">1</td>
-                                <td width="30%">국내도서</td>
-                                <td width="20%">소설/시/희곡</td>
-                                <td width="20%">한국소설</td>
-                                <td width="20%">2000년대 이후 한국소설</td>
-                                <td width="5%"><input type="radio" name="selected"></td>
+                                <td width="5%"><%=i%></td>
+                                <td width="10%">${categoryInfoList.categoryID}</td>
+                                <td width="20%">${categoryInfoList.categoryName}</td>
+                                <td width="20%">${categoryInfoList.categoryDepth1}</td>
+                                <td width="20%">${categoryInfoList.categoryDepth2}</td>
+                                <td width="20%">${categoryInfoList.categoryDepth3}</td>
+                                <td width="5%"><input type="radio" name="selected" value="${categoryInfoList.categoryID}"></td>
                             </tr>
-
-                            <tr>
-                                <td width="5%">2</td>
-                                <td width="30%">외국도서</td>
-                                <td width="20%">소설/시/희곡</td>
-                                <td width="20%">소설</td>
-                                <td width="20%">판타지</td>
-                                <td width="5%"><input type="radio" name="selected"></td>
-                            </tr>
-
-                            <!--11 04 승환 추가한 예시에유-->
+                            <%
+                                        i++;
+                                    }
+                                    i=1;
+                                }
+                            %>
                         </table>
                     </div>
                     <!--테이블 내용 스크롤 끝-->
@@ -113,9 +143,11 @@
             </tr>
         </table>
 
-        <a href="../DefaultView/Main.jsp"><input class="modifyBtn" type="button" value="수정" onclick="modify()"></a>
-        <a href="../DefaultView/Main.jsp"><input class="deleteBtn" type="button" value="삭제" onclick="remove()"></a>
+        <input class="modifyBtn" type="submit" value="수정" formaction="../CategoryView/categoryModi.jsp" onclick="mvModi()">
+        <input class="deleteBtn" type="submit" value="삭제" formaction="/DeleteCategory" onclick="popUp()">
+        <input class="inquiryBtn" type="submit" value="조회" formaction="/LookupCategory" onclick="inquiry()">
     </div>
+    </form>
 </div>  <!-- 내용 div 끝 마진을 왼쪽에서 190px 띄우는 div 끝-->
 
 </body>

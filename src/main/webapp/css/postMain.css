@@ -138,3 +138,10 @@
     height: 2px;
     background: hotpink;
 }
+
+.myInput{
+    border: 0;
+    outline: 0;
+    background: #fae4ef;
+    text-underline: hotpink;
+}
