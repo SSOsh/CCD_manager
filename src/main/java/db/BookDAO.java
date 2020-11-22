@@ -169,4 +169,42 @@ public class BookDAO extends DBConnector
             return null;
         }
     }
+
+    public ArrayList<Book> searchBook(String s)
+    {
+        try
+        {
+            if(s==null)
+            {
+                lookupBookList();
+            }
+            String query= "SELECT * FROM ccd.book WHERE title LIKE \"%"+ s +"%\" OR author LIKE \"%"+ s +"%\"";
+            res=stmt.executeQuery(query);
+            ArrayList<Book> list=new ArrayList<Book>();     //실행한 객체를 담을 list
+
+            while(res.next())       //얻어온 테이블의 행이 끝날때 까지
+            {
+                Book book=new Book();
+
+                book.setBookID(res.getInt("bookId"));
+                book.setStarRating(res.getDouble("starRating"));
+                book.setTitle(res.getString("title"));
+//                book.setTable(res.getString("table"));
+//                book.setPurchaseUrl(res.getString("purchaseUrl"));
+                book.setAuthor(res.getString("author"));
+//                book.setSummarize(res.getString("summarize"));
+                book.setBookCoverUrl(res.getString("bookCoverUrl"));
+//                book.setVideoUrl(res.getString("videoUrl"));
+//                book.setPublisher(res.getString("publisher"));
+
+                list.add(book);
+            }
+            return list;
+        }
+        catch(SQLException e)
+        {
+            e.getStackTrace();
+            return null;
+        }
+    }
 }

@@ -43,7 +43,7 @@ public class LikeDAO extends DBConnector {
     }
 
     //좋아요 on
-    public boolean enrollLike(String title, String author, String memberID) {
+    public void enrollLike(String title, String author, String memberID) {
         try {
             String query = "SELECT bookID FROM ccd.book WHERE title = \"" + title + "\" AND author = \"" + author + "\"";
             res = stmt.executeQuery(query);
@@ -57,22 +57,27 @@ public class LikeDAO extends DBConnector {
             pstmt.setString(2, memberID);
             pstmt.setInt(3, bookID);
             pstmt.executeUpdate();
-            return true;
         } catch (SQLException e) {
             e.getStackTrace();
         }
-        return false;
     }
 
     //좋아요 off
-    public void deleteLike(String id) {
-        int ID = Integer.parseInt(id);
-
+    public void deleteLike(String title, String author, String memberID) {
         try {
-            String query = "delete from ccd.like where like.likeID="+ID;
-            pstmt=conn.prepareStatement(query);
+            String query = "DELETE bookID FROM ccd.book WHERE title = \"" + title + "\" AND author = \"" + author + "\"";
+            res = stmt.executeQuery(query);
+            int bookID = -1;
+            if(res.next()) {
+                bookID = res.getInt("bookID");
+            }
+            query = "INSERT INTO ccd.like(likeStatus, memberID, bookID) VALUES (?, ?, ?)";
+            pstmt = conn.prepareStatement(query);
+            pstmt.setInt(1,1);
+            pstmt.setString(2, memberID);
+            pstmt.setInt(3, bookID);
             pstmt.executeUpdate();
-        } catch (SQLException e){
+        } catch (SQLException e) {
             e.getStackTrace();
         }
     }

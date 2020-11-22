@@ -77,4 +77,31 @@ public class BookStatusProgressDAO extends DBConnector {
             e.getStackTrace();
         }
     }
+
+    //update
+    public void modifyStatus(String title, String author, String userID, String oldStatus) {
+        try {
+            pstmt = conn.prepareStatement("UPDATE ccd.bookprogressstatus SET Status=? WHERE title = ? and author = ? and memberID = ? and status = ?");
+
+            String newStatus="";
+            switch (oldStatus) {
+                case "읽을 책":
+                    newStatus="읽는 중";
+                    break;
+                case "읽는 중":
+                    newStatus="읽은 책";
+                    break;
+            }
+
+            pstmt.setString(1, newStatus);
+            pstmt.setString(2, title);
+            pstmt.setString(3, author);
+            pstmt.setString(4, userID);
+            pstmt.setString(5, oldStatus);
+
+            pstmt.executeUpdate();
+        } catch (SQLException e) {
+            e.getStackTrace();
+        }
+    }
 }
