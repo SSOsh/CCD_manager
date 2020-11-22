@@ -10,7 +10,7 @@ public class DBConnector {
     PreparedStatement pstmt = null;
     Statement stmt = null;
     String user = "root";
-    String password = "zx12qw34!";
+    String password = "0000";
 
     public DBConnector() {
         try{

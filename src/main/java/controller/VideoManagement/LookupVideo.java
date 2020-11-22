@@ -1,4 +1,4 @@
-package controller.BookManagement;
+package controller.VideoManagement;
 
 import db.BookDAO;
 import model.Book;
@@ -11,23 +11,23 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.ArrayList;
 
-@WebServlet("/bookMain")
-public class BrowseBook extends HttpServlet
+@WebServlet("/LookupVideo") //연동할 jsp 혹은 컨트롤러 명을 명시해주면 된다.
+public class LookupVideo extends HttpServlet
 {
-    BookDAO dbManager= new BookDAO();
+    BookDAO dao= new BookDAO();
 
+    //doPost방식으로 하면 된다.
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws IOException, ServletException
     {
+        System.out.println("들어왔어유~");
+
         req.setCharacterEncoding("utf-8");
         ArrayList<Book> bookList;
-        Book book = new Book();
-        book.setTitle(req.getParameter("title"));
-        book.setAuthor(req.getParameter("author"));
 
-        bookList= dbManager.searchBookList(book.getTitle(),book.getAuthor());
+        bookList=dao.searchVideoList();
 
         req.setAttribute("bookList",bookList);
-        req.getRequestDispatcher("/BookView/bookMain.jsp").forward(req,resp);
+        req.getRequestDispatcher("/VideoView/videoMain.jsp").forward(req,resp); //목적지 jsp로 받아온 값을 넘겨주는 것
     }
 }

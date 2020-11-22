@@ -113,7 +113,7 @@
             </tr>
         </table>
 
-        <a href="../DefaultView/Main.jsp"><input class="modifyBtn" type="button" value="수정" onclick="modify()"></a>
+        <a href="../CategoryView/categoryModi.jsp"><input class="modifyBtn" type="button" value="수정" onclick="modify()"></a>
         <a href="../DefaultView/Main.jsp"><input class="deleteBtn" type="button" value="삭제" onclick="remove()"></a>
     </div>
 </div>  <!-- 내용 div 끝 마진을 왼쪽에서 190px 띄우는 div 끝-->

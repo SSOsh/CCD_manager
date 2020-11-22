@@ -17,12 +17,11 @@ public class BookDAO extends DBConnector
     }
 
     //책 정보 관리 클릭하자 마자 전체 책 리스트 조회
-    //아직 서블릿 구현 안함
-    public ArrayList<Book> browseBookList()
+    public ArrayList<Book> lookupBookList()
     {
         try
         {
-            String query="SELECT bookId, bookCoverUrl, title, author, starRating, summarize, publisher FROM ccd.book"; //쿼리 수정해야되누
+            String query="SELECT * FROM ccd.book"; //쿼리 수정해야되누
             res=stmt.executeQuery(query);
 
             ArrayList<Book> list=new ArrayList<Book>();     //실행한 객체를 담을 list
@@ -32,11 +31,14 @@ public class BookDAO extends DBConnector
                 Book book=new Book();
 
                 book.setBookId(res.getInt("bookId"));
-                book.setBookCoverUrl(res.getString("bookCoverUrl"));
-                book.setTitle(res.getString("title"));
-                book.setAuthor(res.getString("author"));
                 book.setStarRating(res.getDouble("starRating"));
+                book.setTitle(res.getString("title"));
+                book.setTable(res.getString("table"));
+                book.setPurchaseUrl(res.getString("purchaseUrl"));
+                book.setAuthor(res.getString("author"));
                 book.setSummarize(res.getString("summarize"));
+                book.setBookCoverUrl(res.getString("bookCoverUrl"));
+                book.setVideoUrl(res.getString("videoUrl"));
                 book.setPublisher(res.getString("publisher"));
 
                 list.add(book);
@@ -50,14 +52,13 @@ public class BookDAO extends DBConnector
         }
     }
 
-
     public ArrayList<Book> searchBookList(String t, String a)
     {
         try
         {
             if(t==null && a==null)
             {
-                browseBookList();
+                lookupBookList();
             }
             String query= "SELECT * FROM ccd.book WHERE title LIKE \"%"+ t +"%\" and author LIKE \"%"+ a +"%\"";
             res=stmt.executeQuery(query);
@@ -68,11 +69,14 @@ public class BookDAO extends DBConnector
                 Book book=new Book();
 
                 book.setBookId(res.getInt("bookId"));
-                book.setBookCoverUrl(res.getString("bookCoverUrl"));
-                book.setTitle(res.getString("title"));
-                book.setAuthor(res.getString("author"));
                 book.setStarRating(res.getDouble("starRating"));
+                book.setTitle(res.getString("title"));
+                book.setTable(res.getString("table"));
+                book.setPurchaseUrl(res.getString("purchaseUrl"));
+                book.setAuthor(res.getString("author"));
                 book.setSummarize(res.getString("summarize"));
+                book.setBookCoverUrl(res.getString("bookCoverUrl"));
+                book.setVideoUrl(res.getString("videoUrl"));
                 book.setPublisher(res.getString("publisher"));
 
                 list.add(book);
@@ -86,24 +90,59 @@ public class BookDAO extends DBConnector
         }
     }
 
-//    //책 정보 삭제
-//    public boolean deleteBookInfo(Book book)
-//    {
-//        try
-//        {
-//            String query = "call ccd.deleteBook(?)";
-//            pstmt = conn.prepareStatement(query);
-//            pstmt.setInt(1, book.getBookId());
-//            int result = pstmt.executeUpdate();
-//
-//            return true;
-//        }
-//        catch(SQLException e)
-//        {
-//            e.getStackTrace();
-//            System.out.println("error");
-//            return false;
-//        }
-//    }
+    //20-11-17 승환 완료
+    //책 정보 삭제
+    public void deleteBookInfo(String id)
+    {
+        try
+        {
+            String query = "delete from ccd.book where book.bookID ="+id;
+            pstmt = conn.prepareStatement(query);
+            pstmt.executeUpdate();
+
+            System.out.println("Delete Success");
+        }
+        catch(SQLException e)
+        {
+            e.getStackTrace();
+            System.out.println("SQL error");
+        }
+    }
+
+    //20-11-20 영상파트 추가
+    public ArrayList<Book> searchVideoList()
+    {
+        try
+        {
+            String query="SELECT * FROM ccd.book WHERE NOT videoUrl is NULL"; //videoUrl 없는 거 빼고 다 긁어오기
+            res=stmt.executeQuery(query);
+
+            ArrayList<Book> list=new ArrayList<Book>();     //실행한 객체를 담을 list
+
+            while(res.next())      //얻어온 테이블의 행이 끝날때 까지
+            {
+                Book book=new Book();
+
+                book.setBookId(res.getInt("bookId"));
+                book.setStarRating(res.getDouble("starRating"));
+                book.setTitle(res.getString("title"));
+                book.setTable(res.getString("table"));
+                book.setPurchaseUrl(res.getString("purchaseUrl"));
+                book.setAuthor(res.getString("author"));
+                book.setSummarize(res.getString("summarize"));
+                book.setBookCoverUrl(res.getString("bookCoverUrl"));
+                book.setVideoUrl(res.getString("videoUrl"));
+                book.setPublisher(res.getString("publisher"));
+
+                list.add(book);
+            }
+            return list;
+        }
+        catch(SQLException e)
+        {
+            e.getStackTrace();
+            return null;
+        }
+    }
 
 }

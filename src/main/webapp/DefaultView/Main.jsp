@@ -23,7 +23,7 @@
 </head>
 
 <body>
-<h1><a href="${pageContext.request.contextPath}/DefaultView/Main.jsp">북돋다 관리자 페이지</a></h1> <!--클릭하면 새로고침되게 했음-->
+<h1><a href="${pageContext.request.contextPath}/DefaultView/homeMain.jsp">북돋다 관리자 페이지</a></h1> <!--클릭하면 새로고침되게 했음-->
 <hr class="myhr">
     <div id="mySidenav" class="sidenav">
         <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
@@ -31,7 +31,8 @@
         <a href="${pageContext.request.contextPath}/BookView/bookMain.jsp">책정보 관리</a>
         <a href="${pageContext.request.contextPath}/CategoryView/categoryMain.jsp">카테고리 관리</a>
         <a href="${pageContext.request.contextPath}/BestSellerView/bestSellerMain.jsp">베스트셀러 조회</a>
-        <a href="${pageContext.request.contextPath}/VideoView/videoMain.jsp">도서관련영상 조회</a>
+<%--        <a href="${pageContext.request.contextPath}/VideoView/videoMain.jsp">도서관련영상 조회</a>--%>
+        <a href="${pageContext.request.contextPath}/LookupVideo">도서관련영상 조회</a>
         <a href="${pageContext.request.contextPath}/ForumView/forumMain.jsp">게시판 관리</a>
         <a href="${pageContext.request.contextPath}/PostView/postMain.jsp">게시물 관리</a>
         <a href="${pageContext.request.contextPath}/CommentView/commentMain.jsp">댓글 관리</a>

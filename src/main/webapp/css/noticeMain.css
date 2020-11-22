@@ -135,3 +135,70 @@
 .noticeBody{
     text-align: left;
 }
+
+.inputGroupReg {
+
+    margin: 0 auto;
+    margin-left: 20px;
+    margin-top: 30px;
+    width: 300px;
+
+    float: left;
+}
+
+.inputGroupReg2 {
+
+    margin: 0 auto;
+    margin-left: 50px;
+    margin-top: 20px;
+
+    width: 300px;
+
+    float: left;
+    text-align: center;
+}
+
+.form-Reg {
+    background-color: rgb(255, 230, 247);
+}
+
+.form-Modi {
+    background-color: rgb(255, 230, 247);
+}
+
+/*noticeReg.jsp에 적용될 부분 추가 11-10 승환*/
+.nReg {
+    background-color: rgb(255, 230, 247);
+}
+
+.formRows{
+    margin-top: 10px;
+    margin-left: 10px;
+    text-align: left;
+}
+
+.ipContents{
+    margin-top: 5px;
+    margin-left: 10px;
+}
+
+.formBtn{
+    margin-left: 850px;
+}
+
+.inquiryBtn2 {
+    border: 2px solid rgb(245, 171, 221);
+    background-color: rgb(241, 190, 225);
+    color: rgb(255, 255, 255);
+    font-size: 20px;
+    border-radius: 10px;
+    padding: 10px;
+    margin-top: 10px;
+}
+
+.myInput{
+    border: 0;
+    outline: 0;
+    background: #fae4ef;
+    text-underline: hotpink;
+}

@@ -1,3 +1,5 @@
+<%@ page import="model.Post" %>
+<%@ page import="java.util.ArrayList" %>
 <%--
   Created by IntelliJ IDEA.
   User: LG
@@ -10,17 +12,27 @@
 <head>
     <title>북돋다 관리자 페이지</title>
     <link href="${pageContext.request.contextPath}/css/postMain.css" rel="stylesheet" type="text/css">
+    <script language="javascript">
+        //삭제버튼 메서드
+        //팝업 띄우는 거
+        function popUp(){
+            alert("성공적으로 삭제되었습니다!")
+        }
+    </script>
 </head>
 <body>
 <%@include file="../DefaultView/Main.jsp" %>
 
+<% String checked = request.getParameter("datailLink");%>
+<% request.getSession().setAttribute("selected",checked); %>
+
 <div class="contents">
+    <form class="formsize" method="POST" accept-charset="UTF-8">
     <div class="divsize">
         <h2><a href="${pageContext.request.contextPath}/PostView/postMain.jsp">게시물 관리</a></h2>
         <hr class="hrPink">
         <div>
             <fieldset class="bookLookup">
-                <form class="formsize" action="/bookMain" method="POST" accept-charset="UTF-8">
                     <div class="form-inline">
                         <div class="inputGroup1">
                             <h3>게시물 조회</h3>
@@ -28,30 +40,29 @@
 
                         <div class="inputGroup2">
                             <div class="inputGroup-prepend">
-                                <span class="input-group-text" id="base-addon1">게시판 이름</span>
+                                <span class="input-group-text" id="base-addon1">게시판명</span>
                             </div>
-                            <input type="text" class="form-control" placeholder="게시판 이름 입력"
-                                   name="title"> <%--aria-describedby="base-addon1" autocomplete="off"--%>
+                            <input type="text" class="form-control" placeholder="게시판명 입력"
+                                   name="forumTitle"> <%--aria-describedby="base-addon1" autocomplete="off"--%>
 
                             <div class="inputGroup-prepend">
                                 <span class="input-group-text" id="base-addon2">게시물 제목</span>
                             </div>
                             <input type="text" class="form-control" placeholder="게시물 제목 입력"
-                                   name="title"> <%--aria-describedby="base-addon1" autocomplete="off"--%>
+                                   name="postTitle"> <%--aria-describedby="base-addon1" autocomplete="off"--%>
 
                             <div class="inputGroup-prepend">
-                                <span class="input-group-text" id="base-addon3">작성자 닉네임</span>
+                                <span class="input-group-text" id="base-addon3">닉네임</span>
                             </div>
                             <input type="text" class="form-control" placeholder="작성자 닉네임 입력"
-                                   name="title"> <%--aria-describedby="base-addon1" autocomplete="off"--%>
+                                   name="nickName"> <%--aria-describedby="base-addon1" autocomplete="off"--%>
                         </div>
 
                         <div class="inputGroup3">
                             <br>
-                            <button type="submit" class="inquiryBtn">검색</button>
+                            <input type="submit" class="inquiryBtn" value="검색" formaction="/LookupPost">
                         </div>
                     </div>
-                </form>
             </fieldset>
         </div>
 
@@ -79,36 +90,37 @@
 
                     <div style="overflow: auto;width: 100%;height: 200px;">
                         <table class="tableBody" width="100%" ; cellspacing="1" border="1" style="table-layout: fixed">
-                            <!--11 06 승환 추가한 예시에유-->
+                            <%
+                                //no.부분 수정필요
+                                if (request.getAttribute("postList") != null) {
+                                    int n =  4;
+                                    ArrayList<Post> arr = (ArrayList<Post>) request.getAttribute("postList");
+                                    for (Post postList : arr) {
+                                        pageContext.setAttribute("postList", postList);
+                            %>
                             <tr>
-                                <td width="5%">1</td>
-                                <td width="10%">1024</td>
-                                <td width="40%"><a href="${pageContext.request.contextPath}/PostView/postLookupDetail.jsp">책 바꿔서 읽으실 분 구함</a></td>
-                                <td width="20%">거의동책벌레</td>
-                                <td width="20%">2020-11-01</td>
-                                <td width="5%"><input type="radio" name="selected"></td>
+                                <td width="5%">${Integer.toString(n)}</td>
+                                <td width="10%">${postList.postID}</td>
+                                <td width="40%"><input type="submit" class="myInput" name="onePost" value="${postList.title}" formaction="LookupPostContents"></td>
+                                <td width="20%">${postList.nickname}</td>
+                                <td width="20%">${postList.date}</td>
+                                <td width="5%"><input type="radio" name="selected" value="${postList.postID}"></td>
                             </tr>
-
-                            <tr>
-                                <td width="5%">2</td>
-                                <td width="10%">999</td>
-                                <td width="40%"><a href="${pageContext.request.contextPath}/PostView/postLookupDetail.jsp">좋은 책 공유해요~</a></td>
-                                <td width="20%">현자</td>
-                                <td width="20%">2020-10-31</td>
-                                <td width="5%"><input type="radio" name="selected"></td>
-                            </tr>
-
-                            <!--11 06 승환 추가한 예시에유-->
+                            <%
+                                        n++;
+                                    }
+                                }
+                            %>
                         </table>
                     </div>
                     <!--테이블 내용 스크롤 끝-->
                 </td>
             </tr>
         </table>
-
-        <a href="../PostView/postMain.jsp"><input class="registerBtn" type="button" value="등록" onclick=""></a>
-        <a href="../PostView/postMain.jsp"><input class="deleteBtn" type="button" value="삭제" onclick=""></a>
+        <%-- form태그에서 action지정안해줘도 formaction으로 분리시켜서 매핑가능 --%>
+        <input type="submit" class="deleteBtn" value="삭제" formaction="/DeletePost" onclick="popUp()">
     </div>
+    </form>
 </div>  <!-- 내용 div 끝 마진을 왼쪽에서 190px 띄우는 div 끝-->
 
 </body>

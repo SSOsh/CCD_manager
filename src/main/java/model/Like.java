@@ -9,4 +9,5 @@ public class Like {
     private String memberID;
     private int bookID;
 
+
 }
