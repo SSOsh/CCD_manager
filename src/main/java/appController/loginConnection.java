@@ -89,7 +89,7 @@ public class loginConnection extends HttpServlet {
             map.put("name", check.getName());
             map.put("nickname", check.getNickname());
             map.put("address", check.getAddress());
-
+            map.put("result", "success");
             list.add(map);
             jsonObj.put("member", list);
             response.getWriter().write(jsonObj.toString());
@@ -97,6 +97,20 @@ public class loginConnection extends HttpServlet {
 
         } else {
             //실패
+            //앱한테 줄 값 넘겨주기
+            JSONObject jsonObj = new JSONObject();
+            //여기서 for문 돌리면서 값 넣으면 될 듯
+            List<Map<String, String>> list = new ArrayList<>();
+            Map<String, String> map = new HashMap<>();
+            map.put("id", check.getMemberID());
+            map.put("pw", check.getMemberPW());
+            map.put("name", check.getName());
+            map.put("nickname", check.getNickname());
+            map.put("address", check.getAddress());
+            map.put("result", "fail");
+            list.add(map);
+            jsonObj.put("member", list);
+            response.getWriter().write(jsonObj.toString());
         }
     }
 }
