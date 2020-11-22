@@ -80,38 +80,36 @@
 
                     <br> <!--헤더랑 바디 간격 띄우려고 추가-->
 
+                    <%! int i=1;%>
+
                     <div style="overflow: auto;width: 100%;height: 200px;">
                         <table class="tableBody" width="100%" ; cellspacing="1" border="1" style="table-layout: fixed">
                             <%
-                                //no.부분 수정필요
                                 if (request.getAttribute("forumList") != null) {
-                                    int n =  4;
                                     ArrayList<Forum> arr = (ArrayList<Forum>) request.getAttribute("forumList");
                                     for (Forum forumList : arr) {
                                         pageContext.setAttribute("forumList", forumList);
                             %>
                             <tr>
-                                <td width="10%">${Integer.toString(n)}</td>
+                                <td width="10%"><%=i%></td>
                                 <td width="80%">${forumList.forumName}</td>
                                 <td width="10%"><input type="radio" name="selected" value="${forumList.forumName}"></td>
                             </tr>
                             <%
-                                        n++;
+                                        i++;
                                     }
+                                    i=1;
                                 }
                             %>
-
-                            <!--실험중-->
                         </table>
                     </div>
                     <!--테이블 내용 스크롤 끝-->
                 </td>
             </tr>
         </table>
-
         <%-- form태그에서 action지정안해줘도 formaction으로 분리시켜서 매핑가능 --%>
         <a href="../ForumView/forumReg.jsp"><input class="registerBtn" type="button" value="등록" onclick="mvEnrl()"></a>
-        <%-- 20-11-19 승환 : jsp로 넘길때 세션에 값을 저장하면 어떨까--%>
+        <%--다른 jsp로 form정보를 보내고 거기서 세션에 값을 저장하는 방식--%>
         <input class="modifyBtn" type="submit" value="수정" formaction="../ForumView/forumModi.jsp" onclick="mvModi()">
         <input type="submit" class="deleteBtn" value="삭제" formaction="/DeleteForum" onclick="popUp()">
     </div>

@@ -31,7 +31,6 @@
         <a href="${pageContext.request.contextPath}/BookView/bookMain.jsp">책정보 관리</a>
         <a href="${pageContext.request.contextPath}/CategoryView/categoryMain.jsp">카테고리 관리</a>
         <a href="${pageContext.request.contextPath}/BestSellerView/bestSellerMain.jsp">베스트셀러 조회</a>
-<%--        <a href="${pageContext.request.contextPath}/VideoView/videoMain.jsp">도서관련영상 조회</a>--%>
         <a href="${pageContext.request.contextPath}/VideoView/videoLookup.jsp">도서관련영상 조회</a>
         <a href="${pageContext.request.contextPath}/ForumView/forumMain.jsp">게시판 관리</a>
         <a href="${pageContext.request.contextPath}/PostView/postMain.jsp">게시물 관리</a>
@@ -39,6 +38,5 @@
         <a href="${pageContext.request.contextPath}/NoticeView/noticeMain.jsp">공지사항 관리</a>
     </div>
     <span style="font-size:30px;cursor:pointer" onclick="openNav()">&#9776;메뉴</span>
-    <!--각자 추가하는 부분은 이런식으로 레이아웃 구성해서 하면 될거같아서 해놓음, main.css파일에 간격 참고-->
 </body>
 </html>

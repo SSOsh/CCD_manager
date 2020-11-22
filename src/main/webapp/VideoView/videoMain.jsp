@@ -97,13 +97,11 @@
         <br>
         저장된 영상의 갯수는 총 <%=maxCnt%> 개 입니다.
         <div id="player">
-            <%--이 안에서 영상 재생--%>
+            <%--이 div 안에서 영상 재생--%>
         </div>
         <hr class="hrPink">
 
         <div class="videoBtn">
-<%--            <input type="submit" class="nextBtn" value="다음" formaction="/LookupVideo" onclick="nextB()">--%>
-<%--            <a href="${pageContext.request.contextPath}/VideoView/videoMain.jsp"><input class="prevBtn" type="button" value="이전" onclick="prevB()"></a>--%>
             <a href="${pageContext.request.contextPath}/VideoView/videoLookup.jsp"><input class="nextBtn" type="button" value="다른 영상 조회"></a>
         </div>
     </div>

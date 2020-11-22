@@ -54,7 +54,7 @@
                         </table>
                     </div>
 
-                    <div style="overflow: auto;width: 100%;height: 300px; margin-top: 6px">
+                    <div style="overflow: auto;width: 100%;height: 500px; margin-top: 6px">
                         <table class="noticeBody" width="100%" ; cellspacing="1" border="1" style="table-layout: fixed">
                             <tr>
                                 <td width="100%">${noticeList.contents}</td>

@@ -22,7 +22,7 @@
 <%@include file="../DefaultView/Main.jsp" %>
 
 <% String checked = request.getParameter("selected");%>
-<%--그냥 checked로 받으면 한글이 깨져유--%>
+<%--그냥 checked로 받으면 한글 깨짐--%>
 <% request.getSession().setAttribute("selected",checked); %>
 <%--여기서 세션에 저장, checked는 한글깨진 상태--%>
 
@@ -57,7 +57,6 @@
                 </form>
             </fieldset>
         </div>
-
 
         <a href="../ForumView/forumMain.jsp"><input class="prevBtn" type="button" value="이전" onclick="goBack()"></a>
     </div>

@@ -68,8 +68,8 @@
                             <tr align="center" height="20">
                                 <th width="5%">No.</th>
                                 <th width="5%">ID</th>
-                                <th width="20%">이미지</th>
-                                <th width="10%">제목</th>
+                                <th width="10%">이미지</th>
+                                <th width="20%">제목</th>
                                 <th width="10%">저자</th>
                                 <th width="5%">별점</th>
                                 <th width="30%">요약설명</th>
@@ -83,30 +83,31 @@
 
                     <br> <!--헤더랑 바디 간격 띄우려고 추가-->
 
-                    <div style="overflow: auto;width: 100%;height: 200px;">
+                    <%! int i=1;%>
+
+                    <div style="overflow: auto;width: 100%;height: 500px;">
                         <table class="tableBody" width="100%" ; cellspacing="1" border="1" style="table-layout: fixed">
                             <%
-                                //no.부분 수정필요
                                 if (request.getAttribute("bookList") != null) {
-                                    int n =  4;
                                     ArrayList<Book> arr = (ArrayList<Book>) request.getAttribute("bookList");
                                     for (Book bookList : arr) {
                                         pageContext.setAttribute("bookList", bookList);
                             %>
                             <tr>
-                                <td width="5%">${Integer.toString(n)}</td>
-                                <td width="5%">${bookList.bookId}</td>
-                                <td width="20%">${bookList.bookCoverUrl}</td>
-                                <td width="10%">${bookList.title}</td>
+                                <td width="5%"><%=i%></td>
+                                <td width="5%">${bookList.bookID}</td>
+                                <td width="10%"><img src="${bookList.bookCoverUrl}" width="auto" height="80px"></td>
+                                <td width="20%">${bookList.title}</td>
                                 <td width="10%">${bookList.author}</td>
                                 <td width="5%">${bookList.starRating}</td>
                                 <td width="30%">${bookList.summarize}</td>
                                 <td width="10%">${bookList.publisher}</td>
-                                <td width="5%"><input type="radio" name="selected" value="${bookList.bookId}"></td>
+                                <td width="5%"><input type="radio" name="selected" value="${bookList.bookID}"></td>
                             </tr>
                             <%
-                                        n++;
+                                        i++;
                                     }
+                                    i=1;
                                 }
                             %>
                         </table>

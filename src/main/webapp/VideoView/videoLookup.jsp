@@ -17,7 +17,7 @@
 <div class="contents">
     <div class="divsize">
         <form class="formsize" method="POST" accept-charset="UTF-8">
-        <h2>도서관련영상 조회</h2>
+            <h2><a href="${pageContext.request.contextPath}/VideoView/videoLookup.jsp">도서관련영상 조회</a></h2>
             <hr class="hrPink">
 
             <input type="number" class="form-control" placeholder="숫자만 입력하세요!" name="count">

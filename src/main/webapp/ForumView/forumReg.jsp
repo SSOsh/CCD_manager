@@ -51,7 +51,6 @@
             </fieldset>
         </div>
 
-
         <a href="../ForumView/forumMain.jsp"><input class="prevBtn" type="button" value="이전" onclick="goBack()"></a>
     </div>
 </div>  <!-- 내용 div 끝 마진을 왼쪽에서 190px 띄우는 div 끝-->
