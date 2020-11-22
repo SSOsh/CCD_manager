@@ -139,4 +139,29 @@ public class NoticeDAO extends DBConnector
             return null;
         }
     }
+
+    //조회
+    public Notice lookupNotice(String t)
+    {
+        try
+        {
+            String query="SELECT * FROM ccd.notice where title =\""+t+"\"";
+            res=stmt.executeQuery(query);
+
+            Notice notice = new Notice();
+
+            notice.setNoticeID(res.getInt("noticeID"));
+            notice.setTitle(res.getString("title"));
+            notice.setDivision(res.getString("division"));
+            notice.setContents(res.getString("contents"));
+            notice.setDate(res.getString("date"));
+
+            return notice;
+        }
+        catch(SQLException e)
+        {
+            e.getStackTrace();
+            return null;
+        }
+    }
 }

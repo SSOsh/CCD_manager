@@ -16,6 +16,15 @@ public class Book {
     private String videoUrl;
     private String publisher;
 
+    public Book() {
+
+    }
+
+    public Book(String title, String author) {
+        this.title = title;
+        this.author = author;
+    }
+
     //11-02 승환 추가한 부분 -> lombok 없어서 걍 게터세터 일단만들어둘게
     public int getBookID() {
         return bookID;

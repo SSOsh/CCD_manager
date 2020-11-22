@@ -30,7 +30,7 @@ public class BookDAO extends DBConnector
             {
                 Book book=new Book();
 
-                book.setBookId(res.getInt("bookId"));
+                book.setBookID(res.getInt("bookId"));
                 book.setStarRating(res.getDouble("starRating"));
                 book.setTitle(res.getString("title"));
                 book.setTable(res.getString("table"));
@@ -68,7 +68,7 @@ public class BookDAO extends DBConnector
             {
                 Book book=new Book();
 
-                book.setBookId(res.getInt("bookId"));
+                book.setBookID(res.getInt("bookId"));
                 book.setStarRating(res.getDouble("starRating"));
                 book.setTitle(res.getString("title"));
                 book.setTable(res.getString("table"));
@@ -123,7 +123,7 @@ public class BookDAO extends DBConnector
             {
                 Book book=new Book();
 
-                book.setBookId(res.getInt("bookId"));
+                book.setBookID(res.getInt("bookId"));
                 book.setStarRating(res.getDouble("starRating"));
                 book.setTitle(res.getString("title"));
                 book.setTable(res.getString("table"));
@@ -144,5 +144,29 @@ public class BookDAO extends DBConnector
             return null;
         }
     }
+    //여기부터 앱
+    public Book lookupBook(String t, String a) {
+        try {
+            String query="SELECT * FROM ccd.book where title LIKE \"%"+ t +"%\" and author LIKE \"%"+ a +"%\"";
+            res=stmt.executeQuery(query);
 
+            Book book=new Book();
+
+            book.setBookID(res.getInt("bookId"));
+            book.setStarRating(res.getDouble("starRating"));
+            book.setTitle(res.getString("title"));
+            book.setTable(res.getString("table"));
+            book.setPurchaseUrl(res.getString("purchaseUrl"));
+            book.setAuthor(res.getString("author"));
+            book.setSummarize(res.getString("summarize"));
+            book.setBookCoverUrl(res.getString("bookCoverUrl"));
+            book.setVideoUrl(res.getString("videoUrl"));
+            book.setPublisher(res.getString("publisher"));
+
+            return book;
+        } catch (SQLException e) {
+            e.getStackTrace();
+            return null;
+        }
+    }
 }

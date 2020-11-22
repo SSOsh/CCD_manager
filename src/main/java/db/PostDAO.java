@@ -143,4 +143,40 @@ public class PostDAO extends DBConnector
             return null;
         }
     }
+    //게시물 등록
+    public boolean enrollPost(Post post) {
+        try {
+            String query = "INSERT INTO ccd.post(title, contents) VALUES (?,?)";
+
+            pstmt = conn.prepareStatement(query);
+            pstmt.setString(1,post.getTitle());
+            pstmt.setString(2,post.getContents());
+
+            pstmt.executeUpdate();
+            return true;
+        } catch (SQLException e) {
+            e.getStackTrace();
+        }
+        return false;
+    }
+
+    //게시물 수정
+    public Post modifyPost(Post newP, Post oldP) {
+        try {
+            pstmt = conn.prepareStatement("UPDATE ccd.post SET title=?, contents=? and title=? and contents=?");
+
+            pstmt.setString(1,newP.getTitle());
+            pstmt.setString(2,newP.getContents());
+
+            pstmt.setString(1,oldP.getTitle());
+            pstmt.setString(2,oldP.getContents());
+
+            pstmt.executeUpdate();
+            return newP;
+        }catch (SQLException e) {
+            e.getStackTrace();
+        }
+        return null;
+    }
+
 }

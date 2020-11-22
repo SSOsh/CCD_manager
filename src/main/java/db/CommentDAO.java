@@ -104,4 +104,36 @@ public class CommentDAO extends DBConnector
             System.out.println("SQL error");
         }
     }
+    //등록
+    public boolean enrollComment(Comment comment) {
+        try {
+            String query = "INSERT INTO ccd.comment(TEXT) VALUES (?)";
+
+            pstmt = conn.prepareStatement(query);
+            pstmt.setString(1,comment.getTEXT());
+
+            pstmt.executeUpdate();
+            return true;
+        } catch(SQLException e) {
+            e.getStackTrace();
+        }
+        return false;
+    }
+
+    //수정
+    public Comment modifyComment(Comment newC, Comment oldC) {
+        try {
+            pstmt = conn.prepareStatement("UPDATE ccd.comment SET TEXT=? and TEXT=?");
+
+            pstmt.setString(1,newC.getTEXT());
+            pstmt.setString(1,oldC.getTEXT());
+
+            pstmt.executeUpdate();
+            return newC;
+        }catch (SQLException e) {
+            e.getStackTrace();
+        }
+        return null;
+    }
+
 }
