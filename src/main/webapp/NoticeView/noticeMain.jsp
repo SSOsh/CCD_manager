@@ -58,26 +58,27 @@
 
                     <br> <!--헤더랑 바디 간격 띄우려고 추가-->
 
+                    <%! int i=1;%>
+
                     <div style="overflow: auto;width: 100%;height: 200px;">
                         <table class="tableBody" width="100%" ; cellspacing="1" border="1" style="table-layout: fixed">
                             <%
-                                //no.부분 수정필요
                                 if (request.getAttribute("noticeList") != null) {
-                                    int n =  4;
                                     ArrayList<Notice> arr = (ArrayList<Notice>) request.getAttribute("noticeList");
                                     for (Notice noticeList : arr) {
                                         pageContext.setAttribute("noticeList", noticeList);
                             %>
                             <tr>
-                                <td width="5%">${Integer.toString(n)}</td>
+                                <td width="5%"><%=i%></td>
                                 <td width="10%">${noticeList.division}</td>
                                 <td width="55%"><input type="submit" class="myInput" name="oneNotice" value="${noticeList.title}" formaction="LookupNoticeContents"></td>
                                 <td width="25%">${noticeList.date}</td>
                                 <td width="5%"><input type="radio" name="selected" value="${noticeList.noticeID}"></td>
                             </tr>
                             <%
-                                        n++;
+                                        i++;
                                     }
+                                    i=1;
                                 }
                             %>
                         </table>

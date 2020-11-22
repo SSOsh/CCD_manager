@@ -40,13 +40,13 @@
                                 <span class="input-group-text" id="base-addon1">성명</span>
                             </div>
                             <input type="text" class="form-control" placeholder="성명 입력"
-                                   name="memberName"> <%--aria-describedby="base-addon1" autocomplete="off"--%>
+                                   name="memberName">
 
                             <div class="inputGroup-prepend">
                                 <span class="input-group-text" id="base-addon2">닉네임</span>
                             </div>
                             <input type="text" class="form-control" placeholder="닉네임 입력"
-                                   name="nickName"> <%--aria-describedby="base-addon2" autocomplete="off"--%>
+                                   name="nickName">
                         </div>
 
                         <div class="inputGroup3">
@@ -79,18 +79,18 @@
                     <%--이까지 테이블 바디 스크롤 시작--%>
                     <br> <!--헤더랑 바디 간격 띄우려고 추가-->
 
+                    <%! int i=1;%>
+
                     <div style="overflow: auto;width: 100%;height: 200px;">
                         <table class="tableBody" width="100%" ; cellspacing="1" border="1" style="table-layout: fixed">
                             <%
-                                //no.부분 수정필요
                                 if (request.getAttribute("memberList") != null) {
-                                    int n =  4;
                                     ArrayList<Member> arr = (ArrayList<Member>) request.getAttribute("memberList");
                                     for (Member memberList : arr) {
                                         pageContext.setAttribute("memberList", memberList);
                             %>
                             <tr>
-                                <td width="5%">${Integer.toString(n)}</td>
+                                <td width="5%"><%=i%></td>
                                 <td width="20%">${memberList.name}</td>
                                 <td width="20%">${memberList.memberID}</td>
                                 <td width="20%">${memberList.nickname}</td>
@@ -98,8 +98,9 @@
                                 <td width="5%"><input type="radio" name="selected" value="${memberList.memberID}"></td>
                             </tr>
                             <%
-                                        n++;
+                                        i++;
                                     }
+                                    i=1;
                                 }
                             %>
                         </table>

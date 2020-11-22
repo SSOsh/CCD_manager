@@ -85,18 +85,19 @@
                     <%--이까지 테이블 헤더 고정 끝--%>
                     <%--이까지 테이블 바디 스크롤 시작--%>
                     <br> <!--헤더랑 바디 간격 띄우려고 추가-->
+
+                    <%! int i=1;%>
+
                     <div style="overflow: auto;width: 100%;height: 200px;">
                         <table class="tableBody" width="100%" ; cellspacing="1" border="1" style="table-layout: fixed">
                             <%
-                                //no.부분 수정필요
                                 if (request.getAttribute("commentList") != null) {
-                                    int n =  4;
                                     ArrayList<Comment> arr = (ArrayList<Comment>) request.getAttribute("commentList");
                                     for (Comment commentList : arr) {
                                         pageContext.setAttribute("commentList", commentList);
                             %>
                             <tr>
-                                <td width="5%">${Integer.toString(n)}</td>
+                                <td width="5%"><%=i%></td>
                                 <td width="10%">${commentList.commentID}</td>
                                 <td width="10%">${commentList.postID}</td>
                                 <td width="10%">${commentList.memdberID}</td>
@@ -105,8 +106,9 @@
                                 <td width="5%"><input type="radio" name="selected" value="${commentList.commentID}"></td>
                             </tr>
                             <%
-                                        n++;
+                                        i++;
                                     }
+                                    i=1;
                                 }
                             %>
                         </table>

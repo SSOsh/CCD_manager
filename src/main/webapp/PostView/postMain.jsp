@@ -88,18 +88,18 @@
                     <%--이까지 테이블 바디 스크롤 시작--%>
                     <br> <!--헤더랑 바디 간격 띄우려고 추가-->
 
-                    <div style="overflow: auto;width: 100%;height: 200px;">
+                    <%! int i=1;%>
+
+                    <div style="overflow: auto;width: 100%;height: 500px;">
                         <table class="tableBody" width="100%" ; cellspacing="1" border="1" style="table-layout: fixed">
                             <%
-                                //no.부분 수정필요
                                 if (request.getAttribute("postList") != null) {
-                                    int n =  4;
                                     ArrayList<Post> arr = (ArrayList<Post>) request.getAttribute("postList");
                                     for (Post postList : arr) {
                                         pageContext.setAttribute("postList", postList);
                             %>
                             <tr>
-                                <td width="5%">${Integer.toString(n)}</td>
+                                <td width="5%"><%=i%></td>
                                 <td width="10%">${postList.postID}</td>
                                 <td width="40%"><input type="submit" class="myInput" name="onePost" value="${postList.title}" formaction="LookupPostContents"></td>
                                 <td width="20%">${postList.nickname}</td>
@@ -107,8 +107,9 @@
                                 <td width="5%"><input type="radio" name="selected" value="${postList.postID}"></td>
                             </tr>
                             <%
-                                        n++;
+                                        i++;
                                     }
+                                    i=1;
                                 }
                             %>
                         </table>
