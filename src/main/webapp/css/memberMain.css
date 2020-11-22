@@ -1,0 +1,102 @@
+.divsize{
+    width: 1000px;
+    height: auto;
+}
+
+.inputGroup1 {
+
+    margin: 0 auto;
+    margin-left: 20px;
+    margin-top: 10px;
+    width: 300px;
+
+    float: left;
+}
+
+.inputGroup2 {
+
+    margin: 0 auto;
+    margin-left: 5px;
+
+    width: 250px;
+
+    float: left;
+}
+
+.inputGroup3 {
+
+    margin: 0 auto;
+    margin-left: 50px;
+
+    width: 300px;
+
+    float: left;
+    text-align: center;
+}
+
+.form-inline {
+    float: left;
+    background-color: rgb(255, 230, 247);
+}
+
+.bookLookup {
+    background-color: rgb(255, 230, 247);
+}
+
+.inquiryBtn {
+    border: 3px solid rgb(255, 255, 255);
+    background-color: rgb(241, 190, 225);
+    color: rgb(255, 255, 255);
+    font-size: 25px;
+    border-radius: 10px;
+    padding: 10px;
+}
+
+.bookTable {
+    table-layout: fixed;
+    /*width: 1000px;*/
+    /*height: 100px;*/
+    text-align: center;
+}
+
+.bookTableHeader {
+    /*table-layout: fixed;*/
+    /*width: 1000px;*/
+    /*height: 100px;*/
+    /*text-align: center;*/
+    width: 100%;
+}
+
+.tableBody{
+    text-align: center;
+}
+
+.deleteBtn {
+    border: 2px solid rgb(245, 171, 221);
+    background-color: rgb(241, 190, 225);
+    color: rgb(255, 255, 255);
+    font-size: 20px;
+    border-radius: 10px;
+    padding: 10px;
+    margin-top: 10px;
+}
+
+.firstRow {
+    table-layout: fixed;
+    border: 2px solid rgb(245, 171, 221);
+    background-color: rgb(241, 190, 225);
+    color: rgb(255, 255, 255);
+    font-size: 15px;
+    align-content: center;
+}
+
+.firstRowDiv{
+    width: 100%;
+    height: 20px;
+}
+
+.hrPink{
+    border: 0;
+    height: 2px;
+    background: hotpink;
+}

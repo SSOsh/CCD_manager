@@ -25,7 +25,7 @@ public class itemmanage {
         url += "&QueryType=Bestseller";//QueryType
         url += "&MaxResults=100";//MaxResults
         url += "&start=1";//start
-        url += "&SearchTarget=Book";//SearchTarget
+        url += "&SearchTarget=model.Book";//SearchTarget
         url += "&output=xml";//output (건드리지마)
         url += "&Version=20131101";//Version
         //갖고오기
@@ -54,7 +54,7 @@ public class itemmanage {
                 System.out.println("상품설명 : " + getTagValue("description", eElement));
                 System.out.println("정가 : " + getTagValue("priceStandard", eElement));
                 System.out.println("커버 : " + getTagValue("cover", eElement));
-                System.out.println("출파낫  : " + getTagValue("publisher", eElement));
+                System.out.println("출판사  : " + getTagValue("publisher", eElement)); //11.01 승환 출판사 오타 수정
             }	// for end
         }	// if end
 
