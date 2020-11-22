@@ -43,13 +43,19 @@ public class LikeDAO extends DBConnector {
     }
 
     //좋아요 on
-    public boolean enrollLike(Like like) {
+    public boolean enrollLike(String title, String author, String memberID) {
         try {
-            String query = "INSERT INTO ccd.like(likeStatus) VALUES (?)";
-
+            String query = "SELECT bookID FROM ccd.book WHERE title = \"" + title + "\" AND author = \"" + author + "\"";
+            res = stmt.executeQuery(query);
+            int bookID = -1;
+            if(res.next()) {
+                bookID = res.getInt("bookID");
+            }
+            query = "INSERT INTO ccd.like(likeStatus, memberID, bookID) VALUES (?, ?, ?)";
             pstmt = conn.prepareStatement(query);
-            pstmt.setInt(1,like.getLikeStatus());
-
+            pstmt.setInt(1,1);
+            pstmt.setString(2, memberID);
+            pstmt.setInt(3, bookID);
             pstmt.executeUpdate();
             return true;
         } catch (SQLException e) {
