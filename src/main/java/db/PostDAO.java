@@ -89,16 +89,11 @@ public class PostDAO extends DBConnector
     }
 
     //게시물 삭제
-    public void deletePost(String id)
+    public void deletePost(String title, String memberID)
     {
-        System.out.println(id);
-
-        int ID = Integer.parseInt(id);
-        System.out.println(ID);
-
         try
         {
-            String query = "delete from ccd.post where post.postID ="+ID; //String일때는 / /로감싸줌
+            String query = "delete from ccd.post where post.title ="+title+ "and memberID=" + memberID; //String일때는 / /로감싸줌
             pstmt = conn.prepareStatement(query);
             pstmt.executeUpdate();
 
@@ -164,7 +159,7 @@ public class PostDAO extends DBConnector
     public int modifyPost(String oldTitle, String title, String text, String userID) {
         try {
             //게시물 제목, 유저아이디 가지고 제목, 내용 변경가능할 듯
-            pstmt = conn.prepareStatement("UPDATE ccd.post SET title=?, contents=? WHERE memberID = ? and title = ?");
+            pstmt = conn.prepareStatement("UPDATE ccd.post SET title=?, contents=? WHERE memberID = ? AND title = ?");
             //게시물 제목, 게시물 내용, 작성자
             pstmt.setString(1,title);
             pstmt.setString(2,text);

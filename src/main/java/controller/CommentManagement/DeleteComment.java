@@ -25,7 +25,7 @@ public class DeleteComment extends HttpServlet
         ArrayList<Comment> commentList;
 
         //jsp파일에서 form태그 안에 넘겨주는데 있는 name 속성을 받아오는 것, 받아와서 바로 삭제에 파라미터로 넘겨줌
-        dao.deleteComment(req.getParameter("selected")); //삭제 실행
+        dao.deleteComment(req.getParameter("userId"),("text")); //삭제 실행
 
         commentList = dao.lookupCommentList(); //삭제 후 전체 리스트 출력해주기 위해 담아옴
 

@@ -83,34 +83,32 @@ public class CommentDAO extends DBConnector
     }
 
     //삭제
-    public void deleteComment(String id)
+    public boolean deleteComment(String userID, String text)
     {
-        System.out.println(id);
-
-        int ID = Integer.parseInt(id);
-        System.out.println(ID); //형변환 끝낸 댓글ID
-
         try
         {
-            String query = "delete from ccd.comment where comment.commentID ="+ID;
+            String query = "delete from ccd.comment where comment.memberID ="+userID + "and contents=" + text;
             pstmt = conn.prepareStatement(query);
             pstmt.executeUpdate();
 
             System.out.println("Delete Success");
+            return true;
         }
         catch(SQLException e)
         {
             e.getStackTrace();
             System.out.println("SQL error");
         }
+        return false;
     }
     //등록
-    public boolean enrollComment(Comment comment) {
+    public boolean enrollComment(String userID, String comment) {
         try {
-            String query = "INSERT INTO ccd.comment(TEXT) VALUES (?)";
+            String query = "INSERT INTO ccd.comment(memdberID,TEXT) VALUES (?,?)";
 
             pstmt = conn.prepareStatement(query);
-            pstmt.setString(1,comment.getTEXT());
+            pstmt.setString(1, userID);
+            pstmt.setString(2, comment);
 
             pstmt.executeUpdate();
             return true;
@@ -121,19 +119,19 @@ public class CommentDAO extends DBConnector
     }
 
     //수정
-    public Comment modifyComment(Comment newC, Comment oldC) {
+    public int modifyComment(String userID, String newText, String oldText) {
         try {
-            pstmt = conn.prepareStatement("UPDATE ccd.comment SET TEXT=? and TEXT=?");
+            pstmt = conn.prepareStatement("UPDATE ccd.comment SET TEXT=? WHERE memberID=? AND TEXT=?");
 
-            pstmt.setString(1,newC.getTEXT());
-            pstmt.setString(1,oldC.getTEXT());
+            pstmt.setString(1,newText);
+            pstmt.setString(2,userID);
+            pstmt.setString(3,oldText);
 
-            pstmt.executeUpdate();
-            return newC;
+            return pstmt.executeUpdate();
         }catch (SQLException e) {
             e.getStackTrace();
         }
-        return null;
+        return -1;
     }
 
 }

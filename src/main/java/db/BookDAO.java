@@ -170,6 +170,31 @@ public class BookDAO extends DBConnector
         }
     }
 
+    public Book lookupBookUrl(String url) {
+        try {
+            String query="SELECT * FROM ccd.book where url LIKE \"%"+ url +"%\"";
+            res=stmt.executeQuery(query);
+
+            Book book=new Book();
+
+            book.setBookID(res.getInt("bookId"));
+            book.setStarRating(res.getDouble("starRating"));
+            book.setTitle(res.getString("title"));
+            book.setTable(res.getString("table"));
+            book.setPurchaseUrl(res.getString("purchaseUrl"));
+            book.setAuthor(res.getString("author"));
+            book.setSummarize(res.getString("summarize"));
+            book.setBookCoverUrl(res.getString("bookCoverUrl"));
+            book.setVideoUrl(res.getString("videoUrl"));
+            book.setPublisher(res.getString("publisher"));
+
+            return book;
+        } catch (SQLException e) {
+            e.getStackTrace();
+            return null;
+        }
+    }
+
     public ArrayList<Book> searchBook(String s)
     {
         try

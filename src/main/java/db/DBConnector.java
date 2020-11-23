@@ -4,13 +4,13 @@ import java.sql.*;
 
 public class DBConnector {
     //url만 수정하면 될듯
-    String url = "jdbc:mysql://Localhost/ccd?characterEncoding=utf8&amp;serverTimezone=UTC&amp;useSSL=false";
+    String url = "jdbc:mysql://172.30.1.4/ccd?characterEncoding=utf8&amp;serverTimezone=UTC&amp;useSSL=false";
     Connection conn = null;
     ResultSet res = null;
     PreparedStatement pstmt = null;
     Statement stmt = null;
-    String user = "root";
-    String password = "zx12qw34!";
+    String user = "user";
+    String password = "1234";
 
     public DBConnector() {
         try{

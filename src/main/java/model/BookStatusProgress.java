@@ -6,7 +6,7 @@ public class BookStatusProgress {
     private String startDay;
     private String finishDay;
     private String Status;
-    private String userID;
+    private String memberID;
     private int BookID;
 
     public String getBookName() {
@@ -44,11 +44,11 @@ public class BookStatusProgress {
         Status = status;
     }
 
-    public String getUserID() {
-        return userID;
+    public String getMemberID() {
+        return memberID;
     }
-    public void setUserID(String userID) {
-        this.userID = userID;
+    public void setMemberID(String userID) {
+        this.memberID = userID;
     }
 
     public int getBookID() {

@@ -45,14 +45,15 @@ public class BookStatusProgressDAO extends DBConnector {
     }
 
     //독서 상황 등록
-    public boolean enrollStatus(BookStatusProgress status) {
+    public boolean enrollStatus(String title, String author, String memberID) {
         try {
-            String query = "INSERT INTO ccd.bookprogressstaus(BookName,Author,Status) VALUES (?,?,?)";
+            String query = "INSERT INTO ccd.bookprogressstaus(BookName,Author,memberID,Status) VALUES (?,?,?,?)";
 
             pstmt = conn.prepareStatement(query);
-            pstmt.setString(1,status.getBookName());
-            pstmt.setString(2,status.getAuthor());
-            pstmt.setString(3,"읽을 책");
+            pstmt.setString(1,title);
+            pstmt.setString(2,author);
+            pstmt.setString(3,memberID);
+            pstmt.setString(4,"읽을 책");
 
             pstmt.executeUpdate();
             return true;
@@ -63,23 +64,23 @@ public class BookStatusProgressDAO extends DBConnector {
     }
 
     //삭제
-    public void deleteStatus(String name, String uid) {
-        int uID = Integer.parseInt(uid);
-
+    public boolean deleteStatus(String name, String uid) {
         try {
             String query = "DELETE FROM ccd.bookprogressstaus WHERE BookName=? AND userID=?";
             pstmt = conn.prepareStatement(query);
             pstmt.setString(1, name);
-            pstmt.setInt(2,uID);
+            pstmt.setString(2,uid);
 
             pstmt.executeUpdate();
+            return true;
         } catch (SQLException e) {
             e.getStackTrace();
         }
+        return false;
     }
 
     //update
-    public void modifyStatus(String title, String author, String userID, String oldStatus) {
+    public boolean modifyStatus(String title, String author, String userID, String oldStatus) {
         try {
             pstmt = conn.prepareStatement("UPDATE ccd.bookprogressstatus SET Status=? WHERE title = ? and author = ? and memberID = ? and status = ?");
 
@@ -100,8 +101,11 @@ public class BookStatusProgressDAO extends DBConnector {
             pstmt.setString(5, oldStatus);
 
             pstmt.executeUpdate();
+
+            return true;
         } catch (SQLException e) {
             e.getStackTrace();
         }
+        return false;
     }
 }

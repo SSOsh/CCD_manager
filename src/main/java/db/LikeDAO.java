@@ -43,7 +43,7 @@ public class LikeDAO extends DBConnector {
     }
 
     //좋아요 on
-    public void enrollLike(String title, String author, String memberID) {
+    public boolean enrollLike(String title, String author, String memberID) {
         try {
             String query = "SELECT bookID FROM ccd.book WHERE title = \"" + title + "\" AND author = \"" + author + "\"";
             res = stmt.executeQuery(query);
@@ -57,13 +57,16 @@ public class LikeDAO extends DBConnector {
             pstmt.setString(2, memberID);
             pstmt.setInt(3, bookID);
             pstmt.executeUpdate();
+
+            return  true;
         } catch (SQLException e) {
             e.getStackTrace();
         }
+        return false;
     }
 
     //좋아요 off
-    public void deleteLike(String title, String author, String memberID) {
+    public boolean deleteLike(String title, String author, String memberID) {
         try {
             String query = "DELETE bookID FROM ccd.book WHERE title = \"" + title + "\" AND author = \"" + author + "\"";
             res = stmt.executeQuery(query);
@@ -77,8 +80,11 @@ public class LikeDAO extends DBConnector {
             pstmt.setString(2, memberID);
             pstmt.setInt(3, bookID);
             pstmt.executeUpdate();
+
+            return true;
         } catch (SQLException e) {
             e.getStackTrace();
         }
+        return false;
     }
 }
