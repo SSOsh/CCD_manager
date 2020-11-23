@@ -1,6 +1,8 @@
 package appController;
 
+import db.LikeDAO;
 import db.MemberDAO;
+import model.Like;
 import model.Member;
 import org.json.simple.JSONObject;
 
@@ -14,37 +16,41 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.SQLException;
+
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 
 import java.util.*;
 
+
 /**
  * Servlet implementation class SampleServlet
  */
-@WebServlet("/login.jsp")
-public class loginConnection extends HttpServlet {
+@WebServlet("/like.jsp")
+public class likeConnection extends HttpServlet {
     private static final long serialVersionUID = 1L;
 
     /*
      * @see HttpServlet#HttpServlet()
      */
-    public loginConnection() {
+    public likeConnection() {
         super();
     }
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        System.out.println("들어옴login");
+
     }
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        request.setCharacterEncoding("euc-kr");
+        request.setCharacterEncoding("UTF-8");
+        System.out.println("like들어옴");
 
         //앱에서 받은 값 처리
-        StringBuffer jb = new StringBuffer();
-        String line;
+        StringBuffer jb;
+        jb = new StringBuffer();
+        String line = "";
         try {
             BufferedReader reader = request.getReader();
             while ((line = reader.readLine()) != null)
@@ -53,12 +59,14 @@ public class loginConnection extends HttpServlet {
             e.printStackTrace();
         }
 
-
         JSONParser parser = null;
         JSONObject jsonObject = null;
         try {
             parser = new JSONParser();
+            System.out.println("파싱되나");
+            System.out.println(jb.toString());
             jsonObject = (JSONObject) parser.parse(jb.toString());
+            System.out.println("파싱된다");
         } catch (ParseException e) {
             // crash and burn
             throw new IOException("Error parsing JSON request string");
@@ -67,52 +75,38 @@ public class loginConnection extends HttpServlet {
         response.setContentType("application/json");
         response.setCharacterEncoding("UTF-8");
 
+        String title, author, memberID;
+        title = jsonObject.get("title").toString();
+        author = jsonObject.get("author").toString();
+        memberID = jsonObject.get("memberID").toString();
+        System.out.println("들어오나");
 
+        LikeDAO likeDAO = new LikeDAO();
 
-        MemberDAO MemberDBM = new MemberDAO();
-        Member member = new Member(jsonObject.get("id").toString(), jsonObject.get("pw").toString());
-        Member check = null;
-        try {
-            check = MemberDBM.login(jsonObject.get("id").toString(), jsonObject.get("pw").toString());
-        } catch (NamingException e) {
-            e.printStackTrace();
-        } catch (SQLException throwables) {
-            throwables.printStackTrace();
-        }
-        if (check != null) {
-            //성공
-            //앱한테 줄 값 넘겨주기
+        boolean check = likeDAO.enrollLike(title, author, memberID);
+        System.out.println(check);
+        if(check) {
             JSONObject jsonObj = new JSONObject();
             //여기서 for문 돌리면서 값 넣으면 될 듯
             List<Map<String, String>> list = new ArrayList<>();
             Map<String, String> map = new HashMap<>();
-            map.put("id", check.getMemberID());
-            map.put("pw", check.getMemberPW());
-            map.put("name", check.getName());
-            map.put("nickname", check.getNickname());
-            map.put("address", check.getAddress());
             map.put("result", "success");
             list.add(map);
-            jsonObj.put("member", list);
+            jsonObj.put("like", list);
             response.getWriter().write(jsonObj.toString());
-            //앱으로 보내줌
-
-        } else {
+            System.out.println(jsonObj.toString());
+        }else {
             //실패
             //앱한테 줄 값 넘겨주기
             JSONObject jsonObj = new JSONObject();
             //여기서 for문 돌리면서 값 넣으면 될 듯
             List<Map<String, String>> list = new ArrayList<>();
             Map<String, String> map = new HashMap<>();
-            map.put("id", check.getMemberID());
-            map.put("pw", check.getMemberPW());
-            map.put("name", check.getName());
-            map.put("nickname", check.getNickname());
-            map.put("address", check.getAddress());
             map.put("result", "fail");
             list.add(map);
-            jsonObj.put("member", list);
+            jsonObj.put("like", list);
             response.getWriter().write(jsonObj.toString());
+            System.out.println(jsonObj.toString());
         }
     }
 }

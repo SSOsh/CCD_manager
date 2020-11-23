@@ -19,17 +19,19 @@ import org.json.simple.parser.ParseException;
 
 import java.util.*;
 
+//수정
+
 /**
  * Servlet implementation class SampleServlet
  */
-@WebServlet("/login.jsp")
-public class loginConnection extends HttpServlet {
+@WebServlet("/dislike.jsp")
+public class dislikeConnection extends HttpServlet {
     private static final long serialVersionUID = 1L;
 
     /*
      * @see HttpServlet#HttpServlet()
      */
-    public loginConnection() {
+    public dislikeConnection() {
         super();
     }
 
@@ -49,9 +51,7 @@ public class loginConnection extends HttpServlet {
             BufferedReader reader = request.getReader();
             while ((line = reader.readLine()) != null)
                 jb.append(line);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+        } catch (Exception e) { /*report an error*/ }
 
 
         JSONParser parser = null;

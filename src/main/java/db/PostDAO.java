@@ -144,14 +144,20 @@ public class PostDAO extends DBConnector
         }
     }
     //게시물 등록
-    public boolean enrollPost(Post post) {
+    public boolean enrollPost(String memberID, String title, String contents) {
         try {
-            String query = "INSERT INTO ccd.post(title, contents) VALUES (?,?)";
-
+            String nickname;
+            String query = "SELECT nickname FROM ccd.member WHERE memberID = \"" + memberID + "\"";
+            res = stmt.executeQuery(query);
+            res.next();
+            nickname = res.getString("nickname");
+             query = "INSERT INTO ccd.post(memberID, forumID, title, contents, nickname) VALUES (?, 1, ?, ?, ?)";
             pstmt = conn.prepareStatement(query);
-            pstmt.setString(1,post.getTitle());
-            pstmt.setString(2,post.getContents());
-
+            pstmt.setString(1,memberID);
+            pstmt.setString(2,title);
+            pstmt.setString(3,contents);
+            pstmt.setString(4,nickname);
+            System.out.println(memberID + " " + title + " " + contents + " " + nickname);
             pstmt.executeUpdate();
             return true;
         } catch (SQLException e) {
@@ -161,22 +167,23 @@ public class PostDAO extends DBConnector
     }
 
     //게시물 수정
-    public Post modifyPost(Post newP, Post oldP) {
+    public int modifyPost(String oldTitle, String title, String text, String userID) {
         try {
-            pstmt = conn.prepareStatement("UPDATE ccd.post SET title=?, contents=? and title=? and contents=?");
+            //게시물 제목, 유저아이디 가지고 제목, 내용 변경가능할 듯
+            pstmt = conn.prepareStatement("UPDATE ccd.post SET title=?, contents=? WHERE memberID = ? AND title = ?");
+            //게시물 제목, 게시물 내용, 작성자
+            pstmt.setString(1,title);
+            pstmt.setString(2,text);
 
-            pstmt.setString(1,newP.getTitle());
-            pstmt.setString(2,newP.getContents());
+            pstmt.setString(3,userID);
+            pstmt.setString(4,oldTitle);
 
-            pstmt.setString(1,oldP.getTitle());
-            pstmt.setString(2,oldP.getContents());
 
-            pstmt.executeUpdate();
-            return newP;
+            return pstmt.executeUpdate();
         }catch (SQLException e) {
             e.getStackTrace();
         }
-        return null;
+        return -1;
     }
 
 }

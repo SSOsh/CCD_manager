@@ -2,15 +2,19 @@ package appController;
 
 import db.MemberDAO;
 import model.Member;
+import org.json.simple.JSONObject;
+import org.json.simple.parser.JSONParser;
+import org.json.simple.parser.ParseException;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.Enumeration;
+import java.util.*;
 
 /**
  * Servlet implementation class SampleServlet
@@ -36,36 +40,63 @@ public class signUpConnection extends HttpServlet {
         System.out.println("signup 들어옴");
         request.setCharacterEncoding("euc-kr");
         //앱에서 받은 값 처리
-        Enumeration<String> parameterNames = request.getParameterNames();
-        String str = "";
-        String[] arr;
-        int num = 0;
-        while (parameterNames.hasMoreElements()) {
-            str = (String) parameterNames.nextElement();
-        }
-        arr = str.split("/");
-        for(int i=0;i<arr.length;i++){
-            System.out.println(arr[i]);
+        StringBuffer jb = new StringBuffer();
+        String line;
+        try {
+            BufferedReader reader = request.getReader();
+            while ((line = reader.readLine()) != null)
+                jb.append(line);
+        } catch (Exception e) { /*report an error*/ }
+
+
+        JSONParser parser = null;
+        JSONObject jsonObject = null;
+        try {
+            parser = new JSONParser();
+            jsonObject = (JSONObject) parser.parse(jb.toString());
+        } catch (ParseException e) {
+            // crash and burn
+            throw new IOException("Error parsing JSON request string");
         }
 
         response.setContentType("application/json");
-        response.setCharacterEncoding("euc-kr");
-        PrintWriter out = response.getWriter();
+        response.setCharacterEncoding("UTF-8");
+
+        String name, id, pw, nickname, address;
+        name = jsonObject.get("name").toString();
+        id = jsonObject.get("id").toString();
+        pw = jsonObject.get("pw").toString();
+        nickname = jsonObject.get("nickname").toString();
+        address = jsonObject.get("address").toString();
+
 
         MemberDAO dbManager = new MemberDAO();
-        Member member = new Member(arr[0], arr[1], arr[2], arr[3], arr[4]);
+        Member member = new Member(name, id, pw, nickname, address);
         boolean check = dbManager.MemberEnroll(member);
-        System.out.println(check);
         if(check) {
             //성공
             //앱한테 줄 값 넘겨주기
-            System.out.println("성공");
-            out.println("성공");
+            JSONObject jsonObj = new JSONObject();
+            //여기서 for문 돌리면서 값 넣으면 될 듯
+            List<Map<String, String>> list = new ArrayList<>();
+            Map<String, String> map = new HashMap<>();
+            map.put("result", "success");
+            list.add(map);
+            jsonObj.put("signup", list);
+            response.getWriter().write(jsonObj.toString());
+            System.out.println(jsonObj.toString());
         }else {
             //실패
             //앱한테 줄 값 넘겨주기
-            System.out.println("실패");
-            out.println("실패");
+            JSONObject jsonObj = new JSONObject();
+            //여기서 for문 돌리면서 값 넣으면 될 듯
+            List<Map<String, String>> list = new ArrayList<>();
+            Map<String, String> map = new HashMap<>();
+            map.put("result", "fail");
+            list.add(map);
+            jsonObj.put("signup", list);
+            response.getWriter().write(jsonObj.toString());
+            System.out.println(jsonObj.toString());
         }
 
 //        //앱으로 줄 값 처리

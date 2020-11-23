@@ -1,8 +1,12 @@
 package appController;
 
+import db.BookDAO;
 import db.MemberDAO;
+import model.Book;
 import model.Member;
 import org.json.simple.JSONObject;
+import org.json.simple.parser.JSONParser;
+import org.json.simple.parser.ParseException;
 
 import javax.naming.NamingException;
 import javax.servlet.ServletException;
@@ -12,24 +16,20 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.BufferedReader;
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.sql.SQLException;
-import org.json.simple.parser.JSONParser;
-import org.json.simple.parser.ParseException;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
-import java.util.*;
-
-/**
- * Servlet implementation class SampleServlet
- */
-@WebServlet("/login.jsp")
-public class loginConnection extends HttpServlet {
+@WebServlet("/bookInfo.jsp")
+public class bookInfoConnection extends HttpServlet {
     private static final long serialVersionUID = 1L;
 
     /*
      * @see HttpServlet#HttpServlet()
      */
-    public loginConnection() {
+    public bookInfoConnection() {
         super();
     }
 
@@ -40,8 +40,8 @@ public class loginConnection extends HttpServlet {
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        request.setCharacterEncoding("euc-kr");
-
+        request.setCharacterEncoding("UTF-8");
+        System.out.println("bookInfo들어옴");
         //앱에서 받은 값 처리
         StringBuffer jb = new StringBuffer();
         String line;
@@ -49,11 +49,9 @@ public class loginConnection extends HttpServlet {
             BufferedReader reader = request.getReader();
             while ((line = reader.readLine()) != null)
                 jb.append(line);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+        } catch (Exception e) { /*report an error*/ }
 
-
+        System.out.println(jb.toString());
         JSONParser parser = null;
         JSONObject jsonObject = null;
         try {
@@ -69,16 +67,10 @@ public class loginConnection extends HttpServlet {
 
 
 
-        MemberDAO MemberDBM = new MemberDAO();
-        Member member = new Member(jsonObject.get("id").toString(), jsonObject.get("pw").toString());
-        Member check = null;
-        try {
-            check = MemberDBM.login(jsonObject.get("id").toString(), jsonObject.get("pw").toString());
-        } catch (NamingException e) {
-            e.printStackTrace();
-        } catch (SQLException throwables) {
-            throwables.printStackTrace();
-        }
+        BookDAO bookD = new BookDAO();
+
+        Book check = null;
+        check = bookD.lookupBook(jsonObject.get("title").toString(), jsonObject.get("writer").toString());
         if (check != null) {
             //성공
             //앱한테 줄 값 넘겨주기
@@ -86,14 +78,15 @@ public class loginConnection extends HttpServlet {
             //여기서 for문 돌리면서 값 넣으면 될 듯
             List<Map<String, String>> list = new ArrayList<>();
             Map<String, String> map = new HashMap<>();
-            map.put("id", check.getMemberID());
-            map.put("pw", check.getMemberPW());
-            map.put("name", check.getName());
-            map.put("nickname", check.getNickname());
-            map.put("address", check.getAddress());
+            map.put("title", check.getTitle());
+            map.put("author", check.getAuthor());
+            map.put("starRating", Double.toString(check.getStarRating()));
+            map.put("table", check.getTable());
+            map.put("summarize", check.getSummarize());
+            map.put("bookcoverUrl", check.getBookCoverUrl());
             map.put("result", "success");
             list.add(map);
-            jsonObj.put("member", list);
+            jsonObj.put("bookInfo", list);
             response.getWriter().write(jsonObj.toString());
             //앱으로 보내줌
 
@@ -104,11 +97,6 @@ public class loginConnection extends HttpServlet {
             //여기서 for문 돌리면서 값 넣으면 될 듯
             List<Map<String, String>> list = new ArrayList<>();
             Map<String, String> map = new HashMap<>();
-            map.put("id", check.getMemberID());
-            map.put("pw", check.getMemberPW());
-            map.put("name", check.getName());
-            map.put("nickname", check.getNickname());
-            map.put("address", check.getAddress());
             map.put("result", "fail");
             list.add(map);
             jsonObj.put("member", list);

@@ -43,14 +43,26 @@ public class LikeDAO extends DBConnector {
     }
 
     //좋아요 on
-    public boolean enrollLike(Like like) {
+    public boolean enrollLike(String title, String author, String memberID) {
         try {
-            String query = "INSERT INTO ccd.like(likeStatus) VALUES (?)";
+            String query = "SELECT bookID FROM ccd.book WHERE title=\"" + title + "\" AND author=\"" + author +"\"";
+            stmt.executeQuery(query);
+            System.out.println(query);
+            int bookID = -1;
 
-            pstmt = conn.prepareStatement(query);
-            pstmt.setInt(1,like.getLikeStatus());
+            if(res.next()) {
+                System.out.println("res있나");
+                bookID = res.getInt("bookID");
+            }
+            System.out.println(bookID);
+            if(bookID != -1){
+                query = "INSERT INTO ccd.like(likeStatus, memberID, bookID) VALUES (1, ?, ?)";
+                pstmt = conn.prepareStatement(query);
+                pstmt.setString(1,memberID);
+                pstmt.setInt(2,bookID);
 
-            pstmt.executeUpdate();
+                pstmt.executeUpdate();
+            }
             return true;
         } catch (SQLException e) {
             e.getStackTrace();
@@ -58,16 +70,26 @@ public class LikeDAO extends DBConnector {
         return false;
     }
 
-    //좋아요 off
-    public void deleteLike(String id) {
-        int ID = Integer.parseInt(id);
 
+    //좋아요 off
+    public boolean deleteLike(String title, String author, String memberID) {
         try {
-            String query = "delete from ccd.like where like.likeID="+ID;
-            pstmt=conn.prepareStatement(query);
+            String query = "SELECT bookID FROM ccd.book WHERE title = \"" + title + "\" AND author = \"" + author + "\"";
+            res = stmt.executeQuery(query);
+            int bookID = -1;
+            if(res.next()) {
+                bookID = res.getInt("bookID");
+            }
+            query = "DELETE ccd.like WHERE bookID = ? AND memberID = ?";
+            pstmt = conn.prepareStatement(query);
+            pstmt.setInt(1,bookID);
+            pstmt.setString(2, memberID);
             pstmt.executeUpdate();
-        } catch (SQLException e){
+
+            return true;
+        } catch (SQLException e) {
             e.getStackTrace();
         }
+        return false;
     }
 }
