@@ -16,10 +16,28 @@ public class Book {
     private String videoUrl;
     private String publisher;
 
+    public Book(){
+        super();
+    }
+
+    public Book(String categoryID, double starRating, String title, String table, String purchaseUrl, String author, String summarize, String bookCoverUrl, String publisher) {
+        super();
+        this.categoryID = categoryID;
+        this.starRating = starRating;
+        this.title = title;
+        this.table = table;
+        this.purchaseUrl = purchaseUrl;
+        this.author = author;
+        this.summarize = summarize;
+        this.bookCoverUrl = bookCoverUrl;
+        this.publisher = publisher;
+    }
+
     //11-02 승환 추가한 부분 -> lombok 없어서 걍 게터세터 일단만들어둘게
     public int getBookID() {
         return bookID;
     }
+
     public void setBookID(int bookID) {
         this.bookID = bookID;
     }

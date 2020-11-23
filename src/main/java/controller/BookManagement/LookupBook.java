@@ -14,7 +14,6 @@ import java.util.ArrayList;
 //20-11-13 승환 - 서블릿 생성중 에러발생 이유가뭘까.. 57 = Java 13 자바 버전이 안맞는듯?
 //20-11-16 승환 - Apache 폴더안에 mySQL DB Connecter.lib의 버전이 안맞아서 그랬었음 ==> 해결 ㄱㅇㄷ
 
-
 @WebServlet("/LookupBook") //연동할 jsp 혹은 컨트롤러 명을 명시해주면 된다.
 public class LookupBook extends HttpServlet
 {
