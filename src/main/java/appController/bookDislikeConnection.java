@@ -82,7 +82,7 @@ public class bookDislikeConnection extends HttpServlet {
             Map<String, String> map = new HashMap<>();
             map.put("result", "success");
             list.add(map);
-            jsonObj.put("bookDislike", list);
+            jsonObj.put("bookDisLike", list);
             response.getWriter().write(jsonObj.toString());
             //앱으로 보내줌
 
@@ -95,7 +95,7 @@ public class bookDislikeConnection extends HttpServlet {
             Map<String, String> map = new HashMap<>();
             map.put("result", "fail");
             list.add(map);
-            jsonObj.put("bookDislike", list);
+            jsonObj.put("bookDisLike", list);
             response.getWriter().write(jsonObj.toString());
         }
     }

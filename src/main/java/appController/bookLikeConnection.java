@@ -73,6 +73,7 @@ public class bookLikeConnection extends HttpServlet {
 
         boolean check = false;
         check = likeD.enrollLike(jsonObject.get("bookName").toString(), jsonObject.get("author").toString(), jsonObject.get("memberID").toString());
+        System.out.println(check);
         if (check != false) {
             //성공
             //앱한테 줄 값 넘겨주기
@@ -82,10 +83,10 @@ public class bookLikeConnection extends HttpServlet {
             Map<String, String> map = new HashMap<>();
             map.put("result", "success");
             list.add(map);
-            jsonObj.put("bookDislike", list);
+            jsonObj.put("bookLike", list);
             response.getWriter().write(jsonObj.toString());
             //앱으로 보내줌
-
+            System.out.println("보냈냐 성공?");
         } else {
             //실패
             //앱한테 줄 값 넘겨주기
@@ -95,7 +96,7 @@ public class bookLikeConnection extends HttpServlet {
             Map<String, String> map = new HashMap<>();
             map.put("result", "fail");
             list.add(map);
-            jsonObj.put("bookDislike", list);
+            jsonObj.put("bookLike", list);
             response.getWriter().write(jsonObj.toString());
         }
     }

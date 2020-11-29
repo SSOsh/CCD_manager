@@ -194,32 +194,4 @@ public class MemberDAO extends DBConnector
         }
     }
 
-//    public Member Memberlookup(HashMap<String,Object> condition)
-//    {
-//        try
-//        {
-//            String query="SELECT*FROM ccd.member"; //쿼리 수정해야되누
-//            res=stmt.executeQuery(query);
-//
-//            if(res.next())       //얻어온 테이블의 행이 끝날때 까지
-//            {
-//                String memberID = res.getString(1);
-//                String memberPW = res.getString(2);
-//                String name = res.getString(3);
-//                String nickname = res.getString(4);
-//                String address = res.getString(5);
-//
-//                Member member = new Member(memberID, memberPW, name, nickname,address);
-//                return member;
-//            }
-//            else
-//                return null;
-//
-//        }
-//        catch(SQLException e)
-//        {
-//            e.getStackTrace();
-//            return null;
-//        }
-//    }
 }

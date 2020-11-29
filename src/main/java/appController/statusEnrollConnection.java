@@ -1,10 +1,9 @@
 package appController;
 
 import db.BookDAO;
-import db.CommentDAO;
+import db.BookStatusProgressDAO;
 import db.MemberDAO;
 import model.Book;
-import model.Comment;
 import model.Member;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
@@ -24,14 +23,14 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-@WebServlet("/commentEnroll.jsp")
-public class commentEnrollConnection extends HttpServlet {
+@WebServlet("/statusEnroll.jsp")
+public class statusEnrollConnection extends HttpServlet {
     private static final long serialVersionUID = 1L;
 
     /*
      * @see HttpServlet#HttpServlet()
      */
-    public commentEnrollConnection() {
+    public statusEnrollConnection() {
         super();
     }
 
@@ -43,7 +42,7 @@ public class commentEnrollConnection extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         request.setCharacterEncoding("UTF-8");
-        System.out.println("commentEnroll들어옴");
+        System.out.println("statusEnroll들어옴");
         //앱에서 받은 값 처리
         StringBuffer jb = new StringBuffer();
         String line;
@@ -68,16 +67,11 @@ public class commentEnrollConnection extends HttpServlet {
         response.setCharacterEncoding("UTF-8");
 
 
-        CommentDAO commentD = new CommentDAO();
 
-        boolean check = true;
-        check = commentD.enrollComment(jsonObject.get("comment").toString(), jsonObject.get("postTitle").toString(), jsonObject.get("postContent").toString(), jsonObject.get("id").toString());
+        BookStatusProgressDAO bookstatusD = new BookStatusProgressDAO();
 
-        System.out.println(jsonObject.get("comment").toString());
-        System.out.println(jsonObject.get("postTitle").toString());
-        System.out.println(jsonObject.get("postContent").toString());
-
-        System.out.println(check);
+        boolean check = false;
+        check = bookstatusD.enrollStatus(jsonObject.get("title").toString(), jsonObject.get("author").toString(), jsonObject.get("memberID").toString());
         if (check != false) {
             //성공
             //앱한테 줄 값 넘겨주기
@@ -85,9 +79,8 @@ public class commentEnrollConnection extends HttpServlet {
             //여기서 for문 돌리면서 값 넣으면 될 듯
             List<Map<String, String>> list = new ArrayList<>();
             Map<String, String> map = new HashMap<>();
-            map.put("result", "success");
             list.add(map);
-            jsonObj.put("commentEnroll", list);
+            jsonObj.put("statusEnroll", list);
             response.getWriter().write(jsonObj.toString());
             //앱으로 보내줌
 
@@ -100,7 +93,7 @@ public class commentEnrollConnection extends HttpServlet {
             Map<String, String> map = new HashMap<>();
             map.put("result", "fail");
             list.add(map);
-            jsonObj.put("commentEnroll", list);
+            jsonObj.put("statusEnroll", list);
             response.getWriter().write(jsonObj.toString());
         }
     }

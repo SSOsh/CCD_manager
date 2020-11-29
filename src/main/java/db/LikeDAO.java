@@ -46,12 +46,10 @@ public class LikeDAO extends DBConnector {
     public boolean enrollLike(String title, String author, String memberID) {
         try {
             String query = "SELECT bookID FROM ccd.book WHERE title=\"" + title + "\" AND author=\"" + author +"\"";
-            stmt.executeQuery(query);
-            System.out.println(query);
+            res = stmt.executeQuery(query);
             int bookID = -1;
 
             if(res.next()) {
-                System.out.println("res있나");
                 bookID = res.getInt("bookID");
             }
             System.out.println(bookID);
@@ -80,7 +78,7 @@ public class LikeDAO extends DBConnector {
             if(res.next()) {
                 bookID = res.getInt("bookID");
             }
-            query = "DELETE ccd.like WHERE bookID = ? AND memberID = ?";
+            query = "DELETE FROM ccd.like WHERE bookID = ? AND memberID = ?";
             pstmt = conn.prepareStatement(query);
             pstmt.setInt(1,bookID);
             pstmt.setString(2, memberID);

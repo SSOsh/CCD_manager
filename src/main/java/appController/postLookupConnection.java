@@ -73,6 +73,7 @@ public class postLookupConnection extends HttpServlet {
                 Map<String, String> map = new HashMap<>();
                 map.put("memberID", check.get(i).getMemberID());
                 map.put("title", check.get(i).getTitle());
+                map.put("content", check.get(i).getContents());
                 map.put("date", check.get(i).getDate());
 
                 list.add(map);

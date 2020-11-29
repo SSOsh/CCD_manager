@@ -18,20 +18,21 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.BufferedReader;
 import java.io.IOException;
+import java.sql.Array;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-@WebServlet("/commentEnroll.jsp")
-public class commentEnrollConnection extends HttpServlet {
+@WebServlet("/commentLookup.jsp")
+public class commentLookupConnection extends HttpServlet {
     private static final long serialVersionUID = 1L;
 
     /*
      * @see HttpServlet#HttpServlet()
      */
-    public commentEnrollConnection() {
+    public commentLookupConnection() {
         super();
     }
 
@@ -43,7 +44,7 @@ public class commentEnrollConnection extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         request.setCharacterEncoding("UTF-8");
-        System.out.println("commentEnroll들어옴");
+        System.out.println("commentLookup들어옴");
         //앱에서 받은 값 처리
         StringBuffer jb = new StringBuffer();
         String line;
@@ -70,15 +71,16 @@ public class commentEnrollConnection extends HttpServlet {
 
         CommentDAO commentD = new CommentDAO();
 
-        boolean check = true;
-        check = commentD.enrollComment(jsonObject.get("comment").toString(), jsonObject.get("postTitle").toString(), jsonObject.get("postContent").toString(), jsonObject.get("id").toString());
+        ArrayList<Comment> check = null;
+        System.out.println("여기 되나");
+        check = commentD.commentLookup(jsonObject.get("memberID").toString(), jsonObject.get("title").toString(), jsonObject.get("content").toString());
 
         System.out.println(jsonObject.get("comment").toString());
         System.out.println(jsonObject.get("postTitle").toString());
         System.out.println(jsonObject.get("postContent").toString());
 
         System.out.println(check);
-        if (check != false) {
+        if (check.size() != 0) {
             //성공
             //앱한테 줄 값 넘겨주기
             JSONObject jsonObj = new JSONObject();

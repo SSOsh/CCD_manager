@@ -43,7 +43,7 @@ public class bookPurchaseConnection extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         request.setCharacterEncoding("UTF-8");
-        System.out.println("bookInfo들어옴");
+        System.out.println("bookPurchase들어옴");
         //앱에서 받은 값 처리
         StringBuffer jb = new StringBuffer();
         String line;
@@ -74,6 +74,7 @@ public class bookPurchaseConnection extends HttpServlet {
         Book check = null;
         check = bookD.lookupBook(jsonObject.get("bookName").toString(), jsonObject.get("author").toString());
         if (check != null) {
+            System.out.println(check.getPurchaseUrl());
             //성공
             //앱한테 줄 값 넘겨주기
             JSONObject jsonObj = new JSONObject();

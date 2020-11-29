@@ -1,16 +1,15 @@
 package appController;
 
-import db.BookDAO;
-import db.CommentDAO;
 import db.MemberDAO;
-import model.Book;
-import model.Comment;
+import db.NoticeDAO;
+import db.PostDAO;
 import model.Member;
+import model.Notice;
+import model.Post;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 
-import javax.naming.NamingException;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -18,32 +17,27 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.BufferedReader;
 import java.io.IOException;
-import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.io.PrintWriter;
+import java.util.*;
 
-@WebServlet("/commentEnroll.jsp")
-public class commentEnrollConnection extends HttpServlet {
-    private static final long serialVersionUID = 1L;
+@WebServlet("/noticeLookup.jsp")
+public class noticeLookupConnection extends HttpServlet {
 
-    /*
-     * @see HttpServlet#HttpServlet()
-     */
-    public commentEnrollConnection() {
+
+    public noticeLookupConnection() {
         super();
     }
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        System.out.println("들어옴login");
+        System.out.println("들어옴");
     }
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        request.setCharacterEncoding("UTF-8");
-        System.out.println("commentEnroll들어옴");
+        System.out.println("noticeLookup 들어옴");
+        request.setCharacterEncoding("euc-kr");
+
         //앱에서 받은 값 처리
         StringBuffer jb = new StringBuffer();
         String line;
@@ -53,7 +47,7 @@ public class commentEnrollConnection extends HttpServlet {
                 jb.append(line);
         } catch (Exception e) { /*report an error*/ }
 
-        System.out.println(jb.toString());
+
         JSONParser parser = null;
         JSONObject jsonObject = null;
         try {
@@ -67,31 +61,28 @@ public class commentEnrollConnection extends HttpServlet {
         response.setContentType("application/json");
         response.setCharacterEncoding("UTF-8");
 
+        NoticeDAO dbManager = new NoticeDAO();
+        ArrayList<Notice> check = dbManager.lookupNoticeList();
 
-        CommentDAO commentD = new CommentDAO();
-
-        boolean check = true;
-        check = commentD.enrollComment(jsonObject.get("comment").toString(), jsonObject.get("postTitle").toString(), jsonObject.get("postContent").toString(), jsonObject.get("id").toString());
-
-        System.out.println(jsonObject.get("comment").toString());
-        System.out.println(jsonObject.get("postTitle").toString());
-        System.out.println(jsonObject.get("postContent").toString());
-
-        System.out.println(check);
-        if (check != false) {
+        if(check.size() != 0) {
             //성공
             //앱한테 줄 값 넘겨주기
             JSONObject jsonObj = new JSONObject();
             //여기서 for문 돌리면서 값 넣으면 될 듯
             List<Map<String, String>> list = new ArrayList<>();
-            Map<String, String> map = new HashMap<>();
-            map.put("result", "success");
-            list.add(map);
-            jsonObj.put("commentEnroll", list);
-            response.getWriter().write(jsonObj.toString());
-            //앱으로 보내줌
 
-        } else {
+            for(int i=0;i<check.size();i++) {
+                Map<String, String> map = new HashMap<>();
+                map.put("title", check.get(i).getTitle());
+                map.put("content", check.get(i).getContents());
+                map.put("date", check.get(i).getDate());
+                list.add(map);
+            }
+
+            jsonObj.put("noticeLookup", list);
+            response.getWriter().write(jsonObj.toString());
+            System.out.println(jsonObj.toString());
+        }else {
             //실패
             //앱한테 줄 값 넘겨주기
             JSONObject jsonObj = new JSONObject();
@@ -100,8 +91,9 @@ public class commentEnrollConnection extends HttpServlet {
             Map<String, String> map = new HashMap<>();
             map.put("result", "fail");
             list.add(map);
-            jsonObj.put("commentEnroll", list);
+            jsonObj.put("noticeLookup", list);
             response.getWriter().write(jsonObj.toString());
+            System.out.println(jsonObj.toString());
         }
     }
 }

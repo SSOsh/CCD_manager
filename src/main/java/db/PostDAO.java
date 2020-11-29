@@ -111,6 +111,27 @@ public class PostDAO extends DBConnector
         }
     }
 
+    //게시물 삭제
+    public boolean deletePost(String title, String memberID)
+    {
+        try
+        {
+            String query = "delete from ccd.post where post.title ="+ title+ "and memberID=" + memberID; //String일때는 / /로감싸줌
+            pstmt = conn.prepareStatement(query);
+            pstmt.executeUpdate();
+
+            System.out.println("Delete Success");
+            return true;
+        }
+        catch(SQLException e)
+        {
+            e.getStackTrace();
+            System.out.println("SQL error");
+        }
+        return false;
+    }
+
+
     //게시물 상세조회
     public ArrayList<Post> searchPostByTitle(String t)
     {
@@ -132,7 +153,7 @@ public class PostDAO extends DBConnector
                 post.setContents(res.getString("contents"));
                 post.setNickname(res.getString("nickname"));
                 post.setDate(res.getString("date"));
-
+                System.out.println(post.getContents());
                 list.add(post);
             }
             return list;
@@ -144,20 +165,19 @@ public class PostDAO extends DBConnector
         }
     }
     //게시물 등록
-    public boolean enrollPost(String memberID, String title, String contents) {
+    public boolean enrollPost(String title, String content, String memberID) {
         try {
             String nickname;
             String query = "SELECT nickname FROM ccd.member WHERE memberID = \"" + memberID + "\"";
             res = stmt.executeQuery(query);
             res.next();
             nickname = res.getString("nickname");
-             query = "INSERT INTO ccd.post(memberID, forumID, title, contents, nickname) VALUES (?, 1, ?, ?, ?)";
-            pstmt = conn.prepareStatement(query);
+            query = "INSERT INTO ccd.post(memberID, forumID, title, contents, nickname) VALUES (?, 1, ?, ?, ?)";
             pstmt.setString(1,memberID);
             pstmt.setString(2,title);
-            pstmt.setString(3,contents);
+            pstmt.setString(3,content);
             pstmt.setString(4,nickname);
-            System.out.println(memberID + " " + title + " " + contents + " " + nickname);
+            System.out.println(memberID + " " + title + " " + content + " " + nickname);
             pstmt.executeUpdate();
             return true;
         } catch (SQLException e) {
@@ -165,6 +185,7 @@ public class PostDAO extends DBConnector
         }
         return false;
     }
+
 
     //게시물 수정
     public int modifyPost(String oldTitle, String title, String text, String userID) {

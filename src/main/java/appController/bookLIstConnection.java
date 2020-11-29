@@ -1,16 +1,12 @@
 package appController;
 
 import db.BookDAO;
-import db.CommentDAO;
-import db.MemberDAO;
+import db.LikeDAO;
 import model.Book;
-import model.Comment;
-import model.Member;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 
-import javax.naming.NamingException;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -18,20 +14,19 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.BufferedReader;
 import java.io.IOException;
-import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-@WebServlet("/commentEnroll.jsp")
-public class commentEnrollConnection extends HttpServlet {
+@WebServlet("/bookList.jsp")
+public class bookLIstConnection extends HttpServlet {
     private static final long serialVersionUID = 1L;
 
     /*
      * @see HttpServlet#HttpServlet()
      */
-    public commentEnrollConnection() {
+    public bookLIstConnection() {
         super();
     }
 
@@ -43,7 +38,7 @@ public class commentEnrollConnection extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         request.setCharacterEncoding("UTF-8");
-        System.out.println("commentEnroll들어옴");
+        System.out.println("bookList");
         //앱에서 받은 값 처리
         StringBuffer jb = new StringBuffer();
         String line;
@@ -68,29 +63,29 @@ public class commentEnrollConnection extends HttpServlet {
         response.setCharacterEncoding("UTF-8");
 
 
-        CommentDAO commentD = new CommentDAO();
 
-        boolean check = true;
-        check = commentD.enrollComment(jsonObject.get("comment").toString(), jsonObject.get("postTitle").toString(), jsonObject.get("postContent").toString(), jsonObject.get("id").toString());
+        BookDAO b = new BookDAO();
+        ArrayList<Book> arr = b.lookupBookList();
 
-        System.out.println(jsonObject.get("comment").toString());
-        System.out.println(jsonObject.get("postTitle").toString());
-        System.out.println(jsonObject.get("postContent").toString());
-
-        System.out.println(check);
-        if (check != false) {
+        if (arr.size() !=0) {
             //성공
             //앱한테 줄 값 넘겨주기
             JSONObject jsonObj = new JSONObject();
             //여기서 for문 돌리면서 값 넣으면 될 듯
             List<Map<String, String>> list = new ArrayList<>();
-            Map<String, String> map = new HashMap<>();
-            map.put("result", "success");
-            list.add(map);
-            jsonObj.put("commentEnroll", list);
+            for(int i=0;i<arr.size();i++) {
+                Map<String, String> map = new HashMap<>();
+                map.put("title", arr.get(i).getTitle());
+                map.put("author", arr.get(i).getAuthor());
+                map.put("bookCoverUrl", arr.get(i).getBookCoverUrl());
+                map.put("starRating", Double.toString(arr.get(i).getStarRating()));
+
+                list.add(map);
+            }
+            jsonObj.put("bookList", list);
             response.getWriter().write(jsonObj.toString());
             //앱으로 보내줌
-
+            System.out.println("보냈냐 성공?");
         } else {
             //실패
             //앱한테 줄 값 넘겨주기
@@ -100,7 +95,7 @@ public class commentEnrollConnection extends HttpServlet {
             Map<String, String> map = new HashMap<>();
             map.put("result", "fail");
             list.add(map);
-            jsonObj.put("commentEnroll", list);
+            jsonObj.put("bookLike", list);
             response.getWriter().write(jsonObj.toString());
         }
     }
